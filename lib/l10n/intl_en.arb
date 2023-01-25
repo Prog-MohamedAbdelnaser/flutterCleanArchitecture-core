@@ -1,0 +1,14 @@
+{
+  "home": "Home",
+  "ok_button": "Ok",
+  "welcome_text": "Welcome to \nTanmeyah Self \nService \nApp",
+  "login_title": "LOG IN",
+  "personal_id": "Personal ID",
+  "password": "Password",
+  "remember_me": "Remember me",
+  "login_button": "LOGIN",
+  "invalid_password": "Invalid password",
+  "forget_password": "Forget password",
+  "invalid_id": "Use your Personal ID and password",
+  "more": "More"
+}
