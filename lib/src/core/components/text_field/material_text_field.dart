@@ -1,4 +1,4 @@
-import '../../main_index.dart';
+import '../../../main_index.dart';
 
 class MaterialTextField extends StatelessWidget {
 
@@ -41,8 +41,8 @@ class MaterialTextField extends StatelessWidget {
               validator:validator,
               onTap:onTap,
               enabled: enabled,
-              cursorColor: kPrimary,
-              style: style ?? kTextRegular.copyWith(color: kFontDarkColor),
+              cursorColor: kPrimaryDark,
+              style: style ?? kTextRegular.copyWith(color: kPrimaryDark),
               maxLines: maxLines,
               readOnly: readOnly==true,
               autofocus: false ,

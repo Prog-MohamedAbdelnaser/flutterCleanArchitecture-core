@@ -1,100 +1,99 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import '../assets/fonts.dart';
 import 'colors.dart';
 
 const kTextLabel = TextStyle(
-  color: kFontDarkColor,
-  fontFamily: 'Regular',
+  color: kPrimaryDark,
+  fontFamily: Fonts.regular,
   height: 1.2, //SETTING THIS CAN SOLVE YOUR PROBLEM
 );
 const kTextLabelWhite = TextStyle(
   color: Colors.white,
   fontSize: 16.0,
-  fontFamily: 'Regular',
+  fontFamily: Fonts.regular,
 );
 const kTextLabelNormal = TextStyle(
-  color: kFontDarkColor,
+  color: kPrimaryDark,
   fontSize: 14.0,
-  fontFamily: 'Regular',
+  fontFamily: Fonts.regular,
 );
 const kTextLabelSmall = TextStyle(
   color: Colors.black,
   fontSize: 10.0,
-  fontFamily: 'Regular',
+  fontFamily: Fonts.regular,
 );
 
 const kTextLabelFontDark = TextStyle(
-  color: kFontDarkColor,
+  color: kPrimaryDark,
   fontSize: 16.0,
-  fontFamily: 'Regular',
+  fontFamily: Fonts.regular,
 );
-final kAppBarShape = RoundedRectangleBorder(
-  borderRadius: new BorderRadius.vertical(
-    bottom: new Radius.elliptical(500, 50),
+const kAppBarShape = RoundedRectangleBorder(
+  borderRadius: BorderRadius.vertical(
+    bottom: Radius.elliptical(500, 50),
   ),
 );
 
 const kTextMedium = TextStyle(
-  color: kFontDarkColor,
+  color: kPrimaryDark,
   fontSize: 16.0,
   height: 1.2, //SETTING THIS CAN SOLVE YOUR PROBLEM
-  fontFamily: 'Medium',
+  fontFamily: Fonts.medium,
 );
 const kTextSemiBold = TextStyle(
-  color: kFontDarkColor,
+  color: kPrimaryDark,
   fontSize: 20.0,
   height: 1,
-  fontFamily: 'SemiBold',
+  fontFamily: Fonts.bold,
 );
 const kDrawerItemStyle =
-    TextStyle(fontFamily: 'Regular', fontSize: 15, color: kPrimary);
+TextStyle(fontFamily: Fonts.regular, fontSize: 15, color: kPrimaryDark);
 
 const kTextRegular = TextStyle(
-  color: kFontDarkColor,
+  color: kPrimaryDark,
   fontSize: 16.0,
   fontFamily: Fonts.regular,
 );
 
 const kTextLight = TextStyle(
-  color: kFontDarkColor,
+  color: kPrimaryDark,
   fontSize: 12.0,
-  fontFamily: 'Light',
+  fontFamily: Fonts.light,
 );
 final kTextRegularPrimary =
-    kTextRegular.copyWith(color: kPrimary, fontSize: 12);
+kTextRegular.copyWith(color: kPrimaryDark, fontSize: 12);
 
 const kTextBold = TextStyle(
-  color: kFontDarkColor,
+  color: kPrimaryDark,
   fontSize: 16.0,
-  fontFamily: 'Bold',
+  fontFamily: Fonts.bold,
 );
 
 const kTextBoldTitle = TextStyle(
-  color: kFontDarkColor,
+  color: kPrimaryDark,
   fontSize: 18.0,
-  fontFamily: 'Bold',
+  fontFamily: Fonts.bold,
 );
 const kTextBoldSmall = TextStyle(
-  color: kFontDarkColor,
+  color: kPrimaryDark,
   fontSize: 11.0,
-  fontFamily: 'Bold',
+  fontFamily: Fonts.bold,
 );
 
 const kTextBodyBold = TextStyle(
-  color: kFontDarkColor,
+  color: kPrimaryDark,
   fontSize: 14.0,
-  fontFamily: 'Bold',
+  fontFamily: Fonts.bold,
 );
 
 const kTextExtraBold = TextStyle(
-  color: kFontDarkColor,
+  color: kPrimaryDark,
   fontSize: 18.0,
-  fontFamily: 'Black',
+  fontFamily: Fonts.bold,
 );
 
 const kProfileFieldDecoration = InputDecoration(
-    fillColor: kWhitTwo,
+    fillColor: kPrimaryLight,
     filled: true,
     errorMaxLines: 1,
     contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
@@ -107,18 +106,18 @@ const kProfileFieldDecoration = InputDecoration(
 final kTextFieldDecoration = InputDecoration(
     filled: false,
     hintStyle: kTextLabelFontDark.copyWith(fontSize: 18, color: kBorderColor),
-    contentPadding:  EdgeInsets.symmetric(vertical: 10, horizontal: 24),
-    border:  OutlineInputBorder(
+    contentPadding:  const EdgeInsets.symmetric(vertical: 10, horizontal: 24),
+    border:  const OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(12)),
       borderSide: BorderSide(color: kBorderColor),
     ),
 
-    enabledBorder:  OutlineInputBorder(
+    enabledBorder:  const OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(12)),
       borderSide:
       BorderSide(color: kBorderColor, width: 1.1, style: BorderStyle.solid),
     ),
-    focusedBorder:  OutlineInputBorder(
+    focusedBorder:  const OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(12)),
       borderSide:
       BorderSide(color: kBorderColor, width: 1.1, style: BorderStyle.solid),
@@ -128,5 +127,5 @@ final kTextFieldDecoration = InputDecoration(
 const kButtonTextStyle = TextStyle(
   fontSize: 24.0,
   color: Colors.white,
-  fontFamily: 'Medium',
+  fontFamily: Fonts.medium,
 );

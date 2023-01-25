@@ -6,7 +6,7 @@ class LoadingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: kWhitThree,
+        color: kPrimaryLight,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -20,7 +20,7 @@ class LoadingView extends StatelessWidget {
 */
                 child: CircularProgressIndicator(
                   strokeWidth: 3,
-                  color: kPrimary,
+                  color: kPrimaryDark,
                 ),
               ),
             ],

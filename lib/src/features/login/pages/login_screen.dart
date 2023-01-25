@@ -3,10 +3,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../core/extensions/extensions.dart';
 import '../../../config/Themes/colors.dart';
 import '../../../config/Themes/text_styles.dart';
-import '../../../core/components/app_cupertino_button.dart';
+import '../../../core/components/buttons/app_cupertino_button.dart';
 import '../../../core/components/base_stateless_widget.dart';
 import '../../../core/components/check_boc.dart';
-import '../../../core/components/material_text_field.dart';
+import '../../../core/components/text_field/material_text_field.dart';
 
 class LoginScreen extends BaseStatelessWidget {
   final Function onClickLogin;
@@ -29,7 +29,7 @@ class LoginScreen extends BaseStatelessWidget {
 
   Widget buildLoginForm(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [logoWidget(), welcomeText(), credentialForm()],
@@ -57,8 +57,8 @@ class LoginScreen extends BaseStatelessWidget {
 
   Widget credentialForm() {
     return Container(
-      padding: EdgeInsets.all(16),
-      margin: EdgeInsets.only(top: 16),
+      padding: const EdgeInsets.all(16),
+      margin: const EdgeInsets.only(top: 16),
       decoration: boxShadow(),
       child: Form(
         key: _formKey,
@@ -80,7 +80,7 @@ class LoginScreen extends BaseStatelessWidget {
       color: Colors.white,
       boxShadow: [
         BoxShadow(
-          color: kBlueGrey.withOpacity(0.1),
+          color: kBlueColor.withOpacity(0.1),
           spreadRadius: 2,
           blurRadius: 2,
           offset: const Offset(2, 2), // c
@@ -95,17 +95,17 @@ class LoginScreen extends BaseStatelessWidget {
       padding: const EdgeInsets.only(top: 8),
       child: Text(
         strings.login_title,
-        style: kTextRegular.copyWith(fontSize: 28, color: kFontBlue),
+        style: kTextRegular.copyWith(fontSize: 28, color: kBlueColor),
       ),
     );
   }
 
   TextStyle welcomeTextStyle() =>
-      kTextLight.copyWith(fontSize: 25, color: kFontBlue);
+      kTextLight.copyWith(fontSize: 25, color: kBlueColor);
 
   Widget personalIdTextField() {
     return MaterialTextField(
-      margin: EdgeInsets.only(top: 16),
+      margin: const EdgeInsets.only(top: 16),
       validator: (value) {
         if (value.isNullOrEmpty()) {
           return strings.invalid_id;
@@ -117,7 +117,7 @@ class LoginScreen extends BaseStatelessWidget {
 
   passwordTextField() {
     return MaterialTextField(
-      margin: EdgeInsets.only(top: 20),
+      margin: const EdgeInsets.only(top: 20),
       obscureText: true,
       validator: (value) {
         if (value.isNullOrEmpty()) {
@@ -135,7 +135,7 @@ class LoginScreen extends BaseStatelessWidget {
           color: kBorderColor,
         ),
         hintText: hint,
-        prefixIconConstraints: BoxConstraints(maxHeight: 24, minWidth: 45));
+        prefixIconConstraints: const BoxConstraints(maxHeight: 24, minWidth: 45));
   }
 
   rememberRow() {
@@ -153,7 +153,7 @@ class LoginScreen extends BaseStatelessWidget {
   loginButton() {
     return AppCupertinoButton(
       child: buttonText(),
-      margin: EdgeInsets.only(top: 25),
+      margin: const EdgeInsets.only(top: 25),
       onPressed: () {
         performLogin();
       },
@@ -161,7 +161,7 @@ class LoginScreen extends BaseStatelessWidget {
   }
 
   Decoration backgroundDecoration() {
-    return BoxDecoration();
+    return const BoxDecoration();
   }
 
   forgetPasswordText() {
@@ -173,7 +173,7 @@ class LoginScreen extends BaseStatelessWidget {
 
   forgetPasswordTextStyle() => kTextLight.copyWith(
         fontSize: 16,
-        color: kGrey_68,
+        color: kGreyColor,
         decoration: TextDecoration.underline,
       );
 
@@ -187,7 +187,7 @@ class LoginScreen extends BaseStatelessWidget {
           strings.login_button,
           style: kButtonTextStyle,
         ),
-        SizedBox(
+        const SizedBox(
           width: 12,
         ),
       ],

@@ -30,10 +30,10 @@ class _CopyRightsState extends State<MaterialCheckBox> {
           child: Row(
             children: [
               Container(
-                margin: EdgeInsetsDirectional.only(end: 6, top: 16, bottom: 16),
+                margin: const EdgeInsetsDirectional.only(end: 6, top: 16, bottom: 16),
                 decoration: BoxDecoration(
                   shape: BoxShape.rectangle,
-                  borderRadius: BorderRadius.all(Radius.circular(6)),
+                  borderRadius: const BorderRadius.all(Radius.circular(6)),
                   border: Border.all(color: kBorderColor, width: 1.5),
                 ),
                 width: 20,
@@ -45,7 +45,7 @@ class _CopyRightsState extends State<MaterialCheckBox> {
                     activeColor: Colors.transparent,
                     value: checked,
                     tristate: false,
-                    shape: CircleBorder(),
+                    shape: const CircleBorder(),
                     onChanged: (bool? value) {
                       checked = (value!);
                       setState(() {});
@@ -53,7 +53,7 @@ class _CopyRightsState extends State<MaterialCheckBox> {
                   ),
                 ),
               ),
-              Text(widget.label,style: kTextLight.copyWith(fontSize: 18,color: kGrey_68),)
+              Text(widget.label,style: kTextLight.copyWith(fontSize: 18,color: kGreyColor),)
             ],
           ),
         ),

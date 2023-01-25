@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '/src/core/dialogs/progress_dialog.dart';
 import '../../main_index.dart';
@@ -19,33 +17,31 @@ class DialogsManager {
           },
           child: Text(
             context.getStrings().ok_button,
-            style: kTextBold.copyWith(color: kPrimary, fontSize: 14),
+            style: kTextBold.copyWith(color: kPrimaryDark, fontSize: 14),
           ),
         )
       ],
-      content: Container(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
+      content: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SizedBox(
+              height: 60,
+              child: Image.asset(
+                'images/error.gif',
                 height: 60,
-                child: Image.asset(
-                  'images/error.gif',
-                  height: 60,
-                ),
               ),
-              Text(
-                text,
-                style: kTextMedium.copyWith(color: kFontDarkColor, fontSize: 12),
-              ),
-            ],
-          ),
+            ),
+            Text(
+              text,
+              style: kTextMedium.copyWith(color: kPrimaryDark, fontSize: 12),
+            ),
+          ],
         ),
       ),
     );
 
-    WidgetsBinding.instance!.addPostFrameCallback((_) async {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       await showDialog(
         barrierDismissible: true,
         context: context,
@@ -63,7 +59,7 @@ class DialogsManager {
       ),
     );
 
-    WidgetsBinding.instance!.addPostFrameCallback((_) async {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       await showDialog(
         barrierDismissible: true,
         context: context,

@@ -3,45 +3,91 @@ import '../../main_index.dart';
 final BorderRadius radius = BorderRadius.circular(6.0);
 
 final ThemeData kAppTheme = ThemeData(
-  fontFamily: 'ProductSans',
-  scaffoldBackgroundColor: secondaryColor,
-  primaryColor: kPrimary,
-  backgroundColor: darkColor,
-  disabledColor: Colors.grey[300],
-  dividerColor: Color(0xfff6f8fa),
-  hintColor: Color(0xffc7c7c7),
-  floatingActionButtonTheme: FloatingActionButtonThemeData(
-    backgroundColor: mainColor,
-    foregroundColor: secondaryColor,
+  primaryColor: kPrimaryDark,
+  primaryColorLight: kPrimaryDark,
+  primaryColorDark: kPrimaryDark,
+  disabledColor: kGreyColor,
+  splashColor: kPrimaryDark,
+  //-----
+  floatingActionButtonTheme: const FloatingActionButtonThemeData(
+    backgroundColor: kPrimaryDark,
+    focusColor: kPrimaryDark,
   ),
-
-  textButtonTheme: TextButtonThemeData(style: TextButton.styleFrom()),
-
-  ///appBar theme
-  appBarTheme: AppBarTheme(
-    textTheme: TextTheme(
-      headline6: TextStyle(
-          fontSize: 20.0,
-          color: secondaryColor,
-          fontWeight: FontWeight.bold,
-          fontFamily: 'ProductSans'),
+  //------------
+  cardTheme: const CardTheme(
+    color: kPrimaryLight,
+    shadowColor: kPrimaryDark,
+  ),
+  //---------
+  appBarTheme: const AppBarTheme(
+    color: kPrimaryDark,
+    centerTitle: true,
+    shadowColor: kPrimaryDark,
+    actionsIconTheme: IconThemeData(color: kPrimaryDark),
+    elevation: 0,
+    titleTextStyle: TextStyle(
+        color: kPrimaryDark, fontSize: 18
     ),
-    color: mainColor,
-    iconTheme: IconThemeData(color: secondaryColor),
-    elevation: 0.0,
+    iconTheme:
+    IconThemeData(color: kPrimaryDark, size: 22),
+  ),
+  //----------
+  buttonTheme: const ButtonThemeData(
+    shape: StadiumBorder(),
+    disabledColor: kGreyColor,
+    buttonColor: kPrimaryDark,
+    splashColor: kPrimaryDark,
+  ),
+  //--------------
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+        textStyle: const TextStyle(
+          color: kPrimaryLight,
+          fontSize: 16,
+        ),
+
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16))),
   ),
 
-  ///text theme
-  textTheme: TextTheme(
-    caption: TextStyle(color: disabledTextColor),
-    button: TextStyle(fontSize: 16.0, letterSpacing: 1, color: secondaryColor),
-    bodyText1: kTextMedium,
-    subtitle1: TextStyle(),
-    subtitle2: TextStyle(color: Color(0xff9c9c9c), fontWeight: FontWeight.w400),
-    bodyText2: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-    headline6: TextStyle(fontWeight: FontWeight.bold),
-    overline: TextStyle(color: secondaryColor, letterSpacing: 1),
+  //------------------
+  textTheme: const TextTheme(
+    displayLarge: kTextExtraBold,
+    headlineLarge: kTextLabel,
+    titleMedium: kTextMedium,
+
+    bodyLarge: kTextMedium,
+    bodySmall: kTextRegular,
   ),
+  //-------------
+  inputDecorationTheme: InputDecorationTheme(
+    contentPadding: const EdgeInsets.all(8),
+    hintStyle: kTextRegular.copyWith(color: kGreyColor),
+    labelStyle: kTextLabelNormal,
+    errorStyle: kTextRegular,
+    enabledBorder: OutlineInputBorder(
+      borderSide: const BorderSide(
+        color: kPrimaryDark,
+      ),
+      borderRadius: BorderRadius.circular(8),
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderSide: const BorderSide(
+        color: Colors.grey,
+        width: 5,
+      ),
+      borderRadius: BorderRadius.circular(8),
+    ),
+    errorBorder: OutlineInputBorder(
+      borderSide: const BorderSide(color: kErrorColor),
+      borderRadius: BorderRadius.circular(8),
+    ),
+    focusedErrorBorder: OutlineInputBorder(
+      borderSide: const BorderSide(color: kPrimaryDark),
+      borderRadius: BorderRadius.circular(8),
+    ),
+  ),
+  //-----------
 );
 
 final kAppTheme2 =    ThemeData(
@@ -62,6 +108,6 @@ final kAppTheme2 =    ThemeData(
         900: Color(0xff1e866f),
       },
     ),
-    hoverColor: kPrimary,
-    buttonColor: kPrimary,
+    hoverColor: kPrimaryDark,
+    buttonColor: kPrimaryDark,
     focusColor: Colors.amber);

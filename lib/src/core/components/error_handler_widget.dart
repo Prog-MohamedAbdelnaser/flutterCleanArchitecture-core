@@ -43,12 +43,12 @@ class ErrorPlaceHolderWidget extends StatelessWidget {
                 margin: const EdgeInsets.only(bottom: 12),
                 child: placeHolderImage,
               ):Container(),
-              title!=null ?Text(title!,style: kTextMedium.copyWith(color: kFontDarkColor,fontSize: 12),):Container(),
+              title!=null ?Text(title!,style: kTextMedium.copyWith(color: kPrimaryDark,fontSize: 12),):Container(),
 
               Text(
                 message.toString().trim(),
                 style:
-                    kTextRegular.copyWith(color: kFontDarkColor, fontSize: 12),
+                    kTextRegular.copyWith(color: kPrimaryDark, fontSize: 12),
                 textAlign: TextAlign.center,
               ),
             ],

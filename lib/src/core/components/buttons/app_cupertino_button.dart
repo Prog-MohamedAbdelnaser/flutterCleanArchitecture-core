@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../main_index.dart';
+import '../../../main_index.dart';
 
 
 class AppCupertinoButton extends StatelessWidget {
@@ -39,7 +39,7 @@ class AppCupertinoButton extends StatelessWidget {
 
     Color enabledColor = backgroundColor != null
         ? backgroundColor!
-        : kPrimary;
+        : kPrimaryDark;
 
     return Padding(
       padding: margin != null ? margin! : const EdgeInsets.all(0),
@@ -48,7 +48,7 @@ class AppCupertinoButton extends StatelessWidget {
         borderRadius: raduis ?? BorderRadius.circular(8),
         onPressed: enable==true ? onPressed:null,
         minSize: height,
-        disabledColor: kPrimary.withOpacity(0.5),
+        disabledColor: kPrimaryDark.withOpacity(0.5),
         color: enabledColor,
         child: child??_buildButton()
       ),

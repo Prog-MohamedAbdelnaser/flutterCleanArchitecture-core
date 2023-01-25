@@ -1,4 +1,4 @@
-import '../../main_index.dart';
+import '../../../main_index.dart';
 
 class BottomNavigationWidget extends StatefulWidget {
   final List<BottomNavigationWidgetModel> items;
@@ -32,7 +32,7 @@ class BottomNavigationState extends State<BottomNavigationWidget> {
       leadingWidth: 0,
       title: Text(
         title,
-        style: kTextSemiBold.copyWith(color: kFontBlackColor,fontSize: 30),
+        style: kTextSemiBold.copyWith(color: kPrimaryDark,fontSize: 30),
       ),
       backgroundColor: Colors.transparent,
       actions: [
@@ -53,7 +53,7 @@ class BottomNavigationState extends State<BottomNavigationWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      backgroundColor: kWhitThree,
+      backgroundColor: kBackgroundColor,
       appBar:kAppBar(title: widget.items[_selectedIndex].label) ,
       body: SafeArea(
         child: Center(
@@ -72,17 +72,17 @@ class BottomNavigationState extends State<BottomNavigationWidget> {
             showSelectedLabels: true,
             showUnselectedLabels: true,
             selectedIconTheme: const IconThemeData(
-              color: kPrimary,
+              color: kPrimaryDark,
             ),
             selectedLabelStyle:
                 kTextRegular.copyWith(color: kBorderColor, fontSize: 12),
             unselectedLabelStyle:
-                kTextRegular.copyWith(color: kPrimary, fontSize: 12),
+                kTextRegular.copyWith(color: kPrimaryDark, fontSize: 12),
             items: widget.items
                 .map((e) => e.builder(_selectedIndex == widget.items.indexOf(e)))
                 .toList(),
             currentIndex: _selectedIndex,
-            selectedItemColor: kPrimary,
+            selectedItemColor: kPrimaryDark,
             onTap: _onItemTapped,
           ),
         ),
@@ -113,14 +113,14 @@ class BottomNavigationItemBuilder extends BottomNavigationBarItem {
       : super(
             icon: Column(
               children: [
-                SizedBox(height: 12,),
+                const SizedBox(height: 12,),
                 model.icon != null
                     ? model.icon!
                     : model.iconPath!.endsWith('svg') == true
                         ? SvgPicture.asset(
                             model.iconPath!,
                             height: 24,
-                            color: selected == true ? kPrimary : kBorderColor,
+                            color: selected == true ? kPrimaryDark : kBorderColor,
                           )
                         : Image.asset(model.iconPath!),
                 const SizedBox(
