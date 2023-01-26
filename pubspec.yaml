@@ -49,7 +49,7 @@ dependencies:
   store_redirect: ^2.0.1
 
   package_info_plus: ^1.4.2
-
+  permission_handler: ^10.2.0
   #local data
   shared_preferences: ^2.0.6
 

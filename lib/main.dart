@@ -1,8 +1,9 @@
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'src/core/network/client/base_client.dart';
 import 'src/main_index.dart';
-
+import 'package:sms_receiver/sms_receiver.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(
@@ -17,10 +18,7 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
-
+   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
