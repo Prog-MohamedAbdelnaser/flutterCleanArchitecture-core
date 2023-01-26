@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'src/core/network/client/base_client.dart';
 import 'src/main_index.dart';
-import 'package:sms_receiver/sms_receiver.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(
