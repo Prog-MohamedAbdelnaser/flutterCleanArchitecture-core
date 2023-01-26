@@ -89,11 +89,11 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.support.distributor" "\0"
+            VALUE "CompanyName", "com.support" "\0"
             VALUE "FileDescription", "workers_distributor" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "workers_distributor" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2023 com.support.distributor. All rights reserved." "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2023 com.support. All rights reserved." "\0"
             VALUE "OriginalFilename", "workers_distributor.exe" "\0"
             VALUE "ProductName", "workers_distributor" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"

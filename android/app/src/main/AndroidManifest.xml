@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.support.distributor.workers_distributor">
+    package="com.support">
     <uses-permission  android:name="android.permission.INTERNET" />
    <application
         android:label="workers_distributor"
