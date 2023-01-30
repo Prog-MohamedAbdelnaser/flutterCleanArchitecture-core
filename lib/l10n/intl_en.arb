@@ -10,5 +10,32 @@
   "invalid_password": "Invalid password",
   "forget_password": "Forget password",
   "invalid_email_or_user_name": "Invalid email or password",
-  "more": "More"
+  "more": "More",
+  "gates": "Gates",
+  "mosques": "Mosques",
+  "restaurants": "Restaurants",
+  "required_number": "Required number {number}",
+  "@required_number": {
+    "description": "Gate number",
+    "placeholders": {
+      "number": {
+        "type": "dynamic"
+      }
+    }
+  },
+  "gate_number": "Gate number {number}",
+  "@gate_number": {
+    "description": "Gate number",
+    "placeholders": {
+      "number": {
+        "type": "dynamic"
+      }
+    }
+  },
+  "resident_employees": "Resident employees",
+  "non_resident_employees": "Non resident employees",
+  "add_new_employee": "Add new employee",
+  "remaining_number": "Remaining number",
+  "today": "Today",
+  "number_completed": "Number completed"
 }

@@ -20,12 +20,20 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ar';
 
+  static String m0(number) => "البوابة رقم :  ${number}";
+
+  static String m1(number) => "العدد المطلوب : ${number}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "add_new_employee":
+            MessageLookupByLibrary.simpleMessage("إضافة موظف جديد"),
         "email_or_userName": MessageLookupByLibrary.simpleMessage(
             "البريد الإلكتروني / اسم المستخدم"),
         "forget_password":
             MessageLookupByLibrary.simpleMessage("نسيت كلمة المرور؟"),
+        "gate_number": m0,
+        "gates": MessageLookupByLibrary.simpleMessage("بوابات"),
         "home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
         "invalid_email_or_user_name": MessageLookupByLibrary.simpleMessage(
             "البريد الإلكتروني / اسم المستخدم غير صحيح"),
@@ -34,9 +42,20 @@ class MessageLookup extends MessageLookupByLibrary {
         "login_button": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "login_title": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "more": MessageLookupByLibrary.simpleMessage("المزيد"),
+        "mosques": MessageLookupByLibrary.simpleMessage("مساجد"),
+        "non_resident_employees":
+            MessageLookupByLibrary.simpleMessage("الموظفين الغير مسكنين"),
+        "number_completed": MessageLookupByLibrary.simpleMessage("اكتمل العدد"),
         "ok_button": MessageLookupByLibrary.simpleMessage("موافق"),
         "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
+        "remaining_number":
+            MessageLookupByLibrary.simpleMessage("العدد المتبقي"),
         "remember_me": MessageLookupByLibrary.simpleMessage("تذكرني"),
+        "required_number": m1,
+        "resident_employees":
+            MessageLookupByLibrary.simpleMessage("الموظفين مسكنين"),
+        "restaurants": MessageLookupByLibrary.simpleMessage("مطاعم"),
+        "today": MessageLookupByLibrary.simpleMessage("اليوم"),
         "welcome_text": MessageLookupByLibrary.simpleMessage(
             "مرحبََا بك مجددََا عميلنا العزيز, نحن سعداء بوجودك معنا")
       };

@@ -169,6 +169,116 @@ class S {
       args: [],
     );
   }
+
+  /// `Gates`
+  String get gates {
+    return Intl.message(
+      'Gates',
+      name: 'gates',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mosques`
+  String get mosques {
+    return Intl.message(
+      'Mosques',
+      name: 'mosques',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Restaurants`
+  String get restaurants {
+    return Intl.message(
+      'Restaurants',
+      name: 'restaurants',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Required number {number}`
+  String required_number(dynamic number) {
+    return Intl.message(
+      'Required number $number',
+      name: 'required_number',
+      desc: 'Gate number',
+      args: [number],
+    );
+  }
+
+  /// `Gate number {number}`
+  String gate_number(dynamic number) {
+    return Intl.message(
+      'Gate number $number',
+      name: 'gate_number',
+      desc: 'Gate number',
+      args: [number],
+    );
+  }
+
+  /// `Resident employees`
+  String get resident_employees {
+    return Intl.message(
+      'Resident employees',
+      name: 'resident_employees',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Non resident employees`
+  String get non_resident_employees {
+    return Intl.message(
+      'Non resident employees',
+      name: 'non_resident_employees',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add new employee`
+  String get add_new_employee {
+    return Intl.message(
+      'Add new employee',
+      name: 'add_new_employee',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Remaining number`
+  String get remaining_number {
+    return Intl.message(
+      'Remaining number',
+      name: 'remaining_number',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Today`
+  String get today {
+    return Intl.message(
+      'Today',
+      name: 'today',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Number completed`
+  String get number_completed {
+    return Intl.message(
+      'Number completed',
+      name: 'number_completed',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

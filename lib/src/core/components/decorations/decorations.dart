@@ -5,6 +5,34 @@ import 'package:support/src/config/Themes/colors.dart';
 import '../../../config/Themes/text_styles.dart';
 
 class Decorations {
+
+
+
+
+  static Decoration decorationWithGradient({Color? color, Color? shadowColor, double? radius, List<BoxShadow>? boxShadow}) {
+    return BoxDecoration(
+      color: color ?? kBackgroundColor,
+      borderRadius: BorderRadius.circular(10),
+      boxShadow: boxShadow ?? [
+        BoxShadow(
+          color: shadowColor ?? kPrimaryLight,
+          spreadRadius: 0,
+          blurRadius: 0,
+          offset: Offset(3, 0), // changes position of shadow
+        ),
+      ],
+      gradient: const LinearGradient(
+        begin: Alignment.centerRight,
+        end: Alignment.centerLeft,
+        colors: [
+          kGreyColor4,
+          kBackgroundColor,
+        ],
+      ),
+    );
+  }
+
+
   static BoxDecoration boxDecorationShaded({
     Color? color,
     Color? shadowColor,

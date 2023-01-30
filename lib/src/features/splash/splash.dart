@@ -15,6 +15,6 @@ class Splash extends StatelessWidget {
   Future<void> toNext(BuildContext context) async {
     await Future.delayed(const Duration(milliseconds: 500));
     // ignore: use_build_context_synchronously
-    Navigator.pushNamed(context, Routs.login);
+    Navigator.pushNamed(context, Routs.home);
   }
 }

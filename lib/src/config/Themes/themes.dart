@@ -3,6 +3,7 @@ import '../../main_index.dart';
 final BorderRadius radius = BorderRadius.circular(6.0);
 
 final ThemeData kAppTheme = ThemeData(
+  scaffoldBackgroundColor: kBackgroundColor,
   primaryColor: kPrimaryDark,
   primaryColorLight: kPrimaryDark,
   primaryColorDark: kPrimaryDark,
@@ -20,16 +21,21 @@ final ThemeData kAppTheme = ThemeData(
   ),
   //---------
   appBarTheme: const AppBarTheme(
-    color: kPrimaryDark,
+    color: kPrimaryLight,
     centerTitle: true,
     shadowColor: kPrimaryDark,
-    actionsIconTheme: IconThemeData(color: kPrimaryDark),
-    elevation: 0,
+    actionsIconTheme: IconThemeData(color: kBackgroundColor),
+    elevation: 3,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(
+        bottom: Radius.circular(20),
+      ),
+    ),
     titleTextStyle: TextStyle(
         color: kPrimaryDark, fontSize: 18
     ),
     iconTheme:
-    IconThemeData(color: kPrimaryDark, size: 22),
+    IconThemeData(color: kBackgroundColor, size: 22),
   ),
   //----------
   buttonTheme: const ButtonThemeData(
@@ -53,9 +59,10 @@ final ThemeData kAppTheme = ThemeData(
   //------------------
   textTheme: const TextTheme(
     displayLarge: kTextExtraBold,
+    displayMedium: kTextBold,
+    displaySmall: kTextMedium,
     headlineLarge: kTextLabel,
     titleMedium: kTextMedium,
-
     bodyLarge: kTextMedium,
     bodySmall: kTextRegular,
   ),
