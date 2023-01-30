@@ -99,9 +99,9 @@ flutter:
   uses-material-design: true
   generate: true
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+     - assets/images/
+     - assets/icons/login/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -128,5 +128,35 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+  fonts:
+    - family: Bold
+      fonts:
+        - asset: fonts/alfont_com_Somar-Bold.otf
+          weight: 900
+
+    - family: Light
+      fonts:
+        - asset: fonts/alfont_com_Somar-Light.otf
+          weight: 900
+
+    - family: Medium
+      fonts:
+        - asset: fonts/alfont_com_Somar-Medium.otf
+          weight: 900
+
+    - family: Regular
+      fonts:
+        - asset: fonts/alfont_com_Somar-Regular.otf
+          weight: 900
+
+    - family: Black
+      fonts:
+        - asset: fonts/alfont_com_Somar-Black.otf
+          weight: 900
+    - family: SemiBold
+      fonts:
+        - asset: fonts/Somar-SemiBold.otf
+          weight: 900
+
 flutter_intl:
   enabled: true
