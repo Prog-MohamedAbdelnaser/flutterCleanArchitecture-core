@@ -1,7 +1,7 @@
 import '../../../main_index.dart';
 
 class MaterialTextField extends StatelessWidget {
-
+  final String? title;
   final TextEditingController? controller ;
   final EdgeInsetsGeometry? margin ;
    final AutovalidateMode? autovalidateMode ;
@@ -23,35 +23,47 @@ class MaterialTextField extends StatelessWidget {
   final ValueChanged<String>? onChanged;
   const MaterialTextField({Key? key,this.style ,  this.controller, this.margin, this.autovalidateMode= AutovalidateMode.onUserInteraction, this.validator,
     this.focusNode, this.inputDecoration, this.keyboardType, this.onChanged, this.radius = 8, this.initialValue, this.enabled,
-    this.color , this.obscureText, this.textInputAction = TextInputAction.next,this.startIcon, this.onTap, this.readOnly =false, this.maxLines=1}) : super(key: key);
+    this.color , this.obscureText, this.textInputAction = TextInputAction.next,this.startIcon, this.onTap, this.readOnly =false, this.maxLines=1, this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return  Padding(
       padding: margin!=null?margin!:EdgeInsets.zero,
-      child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          startIcon!=null ? startIcon! : Container(),
-          Expanded(
-            child: TextFormField(
-              textInputAction: textInputAction,
-              initialValue:initialValue ,
-              controller:controller ,
-              autovalidateMode:autovalidateMode ,
-              validator:validator,
-              onTap:onTap,
-              enabled: enabled,
-              cursorColor: kPrimaryDark,
-              style: style ?? kTextRegular.copyWith(color: kPrimaryDark),
-              maxLines: maxLines,
-              readOnly: readOnly==true,
-              autofocus: false ,
-              showCursor: readOnly==true?false:true,
-              obscureText: obscureText==true,
-              onChanged:onChanged,
-              keyboardType: keyboardType,
-              decoration: inputDecoration!=null ? inputDecoration! :kTextFieldDecoration,
-            ),
+          title!=null ?
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            child: Text(
+              title ?? '',
+              style: kTextRegular.copyWith(color: kGreyColor2)),
+          ) : const SizedBox(),
+          Row(
+            children: [
+              startIcon!=null ? startIcon! : Container(),
+              Expanded(
+                child: TextFormField(
+                  textInputAction: textInputAction,
+                  initialValue:initialValue ,
+                  controller:controller ,
+                  autovalidateMode:autovalidateMode ,
+                  validator:validator,
+                  onTap:onTap,
+                  enabled: enabled,
+                  cursorColor: kPrimaryDark,
+                  style: style ?? kTextRegular.copyWith(color: kPrimaryDark),
+                  maxLines: maxLines,
+                  readOnly: readOnly==true,
+                  autofocus: false ,
+                  showCursor: readOnly==true?false:true,
+                  obscureText: obscureText==true,
+                  onChanged:onChanged,
+                  keyboardType: keyboardType,
+                  decoration: inputDecoration!=null ? inputDecoration! :kTextFieldDecoration,
+                ),
+              ),
+            ],
           ),
         ],
       ),

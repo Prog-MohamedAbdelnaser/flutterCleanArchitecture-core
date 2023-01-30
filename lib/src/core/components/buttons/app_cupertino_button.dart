@@ -39,7 +39,7 @@ class AppCupertinoButton extends StatelessWidget {
 
     Color enabledColor = backgroundColor != null
         ? backgroundColor!
-        : kPrimaryDark;
+        : kPrimaryLight;
 
     return Padding(
       padding: margin != null ? margin! : const EdgeInsets.all(0),
@@ -48,7 +48,7 @@ class AppCupertinoButton extends StatelessWidget {
         borderRadius: raduis ?? BorderRadius.circular(8),
         onPressed: enable==true ? onPressed:null,
         minSize: height,
-        disabledColor: kPrimaryDark.withOpacity(0.5),
+        disabledColor: kPrimaryLight.withOpacity(0.5),
         color: enabledColor,
         child: child??_buildButton()
       ),

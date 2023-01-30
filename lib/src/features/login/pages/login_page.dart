@@ -16,7 +16,7 @@ class LoginPage extends BaseBlocWidget<UnInitState , LoginBloc>{
 
   @override
   void onRequestSuccess(String? message) {
-
+    Navigator.of(context).pushNamedAndRemoveUntil('/home', (route) => false);
   }
 
 }

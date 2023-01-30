@@ -106,19 +106,19 @@ const kProfileFieldDecoration = InputDecoration(
 final kTextFieldDecoration = InputDecoration(
     filled: false,
     hintStyle: kTextLabelFontDark.copyWith(fontSize: 18, color: kBorderColor),
-    contentPadding:  const EdgeInsets.symmetric(vertical: 10, horizontal: 24),
+    contentPadding:  const EdgeInsets.symmetric(vertical: 25, horizontal: 24),
     border:  const OutlineInputBorder(
-      borderRadius: BorderRadius.all(Radius.circular(12)),
+      borderRadius: BorderRadius.all(Radius.circular(2)),
       borderSide: BorderSide(color: kBorderColor),
     ),
 
     enabledBorder:  const OutlineInputBorder(
-      borderRadius: BorderRadius.all(Radius.circular(12)),
+      borderRadius: BorderRadius.all(Radius.circular(2)),
       borderSide:
       BorderSide(color: kBorderColor, width: 1.1, style: BorderStyle.solid),
     ),
     focusedBorder:  const OutlineInputBorder(
-      borderRadius: BorderRadius.all(Radius.circular(12)),
+      borderRadius: BorderRadius.all(Radius.circular(2)),
       borderSide:
       BorderSide(color: kBorderColor, width: 1.1, style: BorderStyle.solid),
     ));

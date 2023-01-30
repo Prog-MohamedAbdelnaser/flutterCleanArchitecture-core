@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: kAppTheme,
       debugShowCheckedModeBanner: false,
-      locale: Locale('en'),
+      locale: Locale('ar'),
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
@@ -33,6 +33,7 @@ class MyApp extends StatelessWidget {
       ],
       supportedLocales: const [
         Locale('en'), // English, no country code
+        Locale('ar'), // Arabic, no country code
       ],
       routes: Routs.routes,
       initialRoute: Routs.intro,

@@ -70,10 +70,10 @@ class S {
     );
   }
 
-  /// `Welcome to \nTanmeyah Self \nService \nApp`
+  /// `Welcome back our dear customer, we are glad to have you with us.`
   String get welcome_text {
     return Intl.message(
-      'Welcome to \nTanmeyah Self \nService \nApp',
+      'Welcome back our dear customer, we are glad to have you with us.',
       name: 'welcome_text',
       desc: '',
       args: [],
@@ -90,11 +90,11 @@ class S {
     );
   }
 
-  /// `Personal ID`
-  String get personal_id {
+  /// `Email / Username`
+  String get email_or_userName {
     return Intl.message(
-      'Personal ID',
-      name: 'personal_id',
+      'Email / Username',
+      name: 'email_or_userName',
       desc: '',
       args: [],
     );
@@ -150,11 +150,11 @@ class S {
     );
   }
 
-  /// `Use your Personal ID and password`
-  String get invalid_id {
+  /// `Invalid email or password`
+  String get invalid_email_or_user_name {
     return Intl.message(
-      'Use your Personal ID and password',
-      name: 'invalid_id',
+      'Invalid email or password',
+      name: 'invalid_email_or_user_name',
       desc: '',
       args: [],
     );
@@ -177,6 +177,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
   List<Locale> get supportedLocales {
     return const <Locale>[
       Locale.fromSubtags(languageCode: 'en'),
+      Locale.fromSubtags(languageCode: 'ar'),
     ];
   }
 

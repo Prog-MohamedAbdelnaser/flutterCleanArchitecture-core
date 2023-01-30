@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../../../config/assets/app_icons.dart';
+import '../../../config/assets/assets.dart';
 import '../../../core/extensions/extensions.dart';
 import '../../../config/Themes/colors.dart';
 import '../../../config/Themes/text_styles.dart';
@@ -17,31 +19,43 @@ class LoginScreen extends BaseStatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: backgroundDecoration(),
-      child: SafeArea(
-        child: Scaffold(
-            backgroundColor: Colors.transparent,
-            body: SingleChildScrollView(child: buildLoginForm(context))),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: kBackgroundColor,
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: buildLoginForm(context),
+        ),
       ),
     );
   }
 
   Widget buildLoginForm(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [logoWidget(), welcomeText(), credentialForm()],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        logoWidget(),
+        const SizedBox(height: 40),
+        welcomeText(),
+        credentialForm(),
+      ],
     );
   }
 
   Widget logoWidget() {
+
+
     return Padding(
-      padding: const EdgeInsets.only(top: 20),
+      padding: const EdgeInsets.only(top: 40),
       child: Align(
-          alignment: AlignmentDirectional.centerStart, child: Container()),
+        alignment: AlignmentDirectional.center,
+        child: Image.asset(
+          Assets.logo,
+          width: 100,
+          height: 100,
+        ),
+      ),
     );
   }
 
@@ -51,26 +65,26 @@ class LoginScreen extends BaseStatelessWidget {
       child: Text(
         strings.welcome_text,
         style: welcomeTextStyle(),
+        textAlign: TextAlign.center,
       ),
     );
   }
 
   Widget credentialForm() {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      margin: const EdgeInsets.only(top: 16),
-      decoration: boxShadow(),
-      child: Form(
-        key: _formKey,
-        child: Column(
-          children: [
-            loginLabel(),
-            personalIdTextField(),
-            passwordTextField(),
-            rememberRow(),
-            loginButton()
-          ],
-        ),
+    return Form(
+      key: _formKey,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+      //    loginLabel(),
+          const SizedBox(height: 20),
+          personalIdTextField(),
+          passwordTextField(),
+          const SizedBox(height: 20),
+          rememberRow(),
+          const SizedBox(height: 20),
+          loginButton()
+        ],
       ),
     );
   }
@@ -95,20 +109,23 @@ class LoginScreen extends BaseStatelessWidget {
       padding: const EdgeInsets.only(top: 8),
       child: Text(
         strings.login_title,
-        style: kTextRegular.copyWith(fontSize: 28, color: kBlueColor),
+        style: kTextRegular.copyWith(fontSize: 28),
       ),
     );
   }
 
   TextStyle welcomeTextStyle() =>
-      kTextLight.copyWith(fontSize: 25, color: kBlueColor);
+      kTextLight.copyWith(fontSize: 25, color: kGreyColor3);
 
   Widget personalIdTextField() {
     return MaterialTextField(
+      title: strings.email_or_userName,
       margin: const EdgeInsets.only(top: 16),
+      inputDecoration: fieldDecoration(
+          iconSvgPath: AppIcons.email),
       validator: (value) {
         if (value.isNullOrEmpty()) {
-          return strings.invalid_id;
+          return strings.invalid_email_or_user_name;
         }
         return null;
       },
@@ -117,8 +134,11 @@ class LoginScreen extends BaseStatelessWidget {
 
   passwordTextField() {
     return MaterialTextField(
+      title: strings.password,
       margin: const EdgeInsets.only(top: 20),
       obscureText: true,
+      inputDecoration: fieldDecoration(
+          iconSvgPath: AppIcons.lock),
       validator: (value) {
         if (value.isNullOrEmpty()) {
           return strings.invalid_password;
@@ -134,17 +154,19 @@ class LoginScreen extends BaseStatelessWidget {
           iconSvgPath,
           color: kBorderColor,
         ),
+
         hintText: hint,
-        prefixIconConstraints: const BoxConstraints(maxHeight: 24, minWidth: 45));
+        prefixIconConstraints:
+            const BoxConstraints(maxHeight: 24, minWidth: 45));
   }
 
   rememberRow() {
     return Row(
       children: [
-        Expanded(
-            child: MaterialCheckBox(
-          label: strings.remember_me,
-        )),
+        // Expanded(
+        //     child: MaterialCheckBox(
+        //   label: strings.remember_me,
+        // )),
         forgetPasswordText()
       ],
     );
@@ -161,7 +183,9 @@ class LoginScreen extends BaseStatelessWidget {
   }
 
   Decoration backgroundDecoration() {
-    return const BoxDecoration();
+    return const BoxDecoration(
+      color: kPrimaryLight,
+    );
   }
 
   forgetPasswordText() {

@@ -61,7 +61,7 @@ final ThemeData kAppTheme = ThemeData(
   ),
   //-------------
   inputDecorationTheme: InputDecorationTheme(
-    contentPadding: const EdgeInsets.all(8),
+    contentPadding: const EdgeInsets.all(20),
     hintStyle: kTextRegular.copyWith(color: kGreyColor),
     labelStyle: kTextLabelNormal,
     errorStyle: kTextRegular,
@@ -69,22 +69,22 @@ final ThemeData kAppTheme = ThemeData(
       borderSide: const BorderSide(
         color: kPrimaryDark,
       ),
-      borderRadius: BorderRadius.circular(8),
+      borderRadius: BorderRadius.circular(2),
     ),
     focusedBorder: OutlineInputBorder(
       borderSide: const BorderSide(
         color: Colors.grey,
         width: 5,
       ),
-      borderRadius: BorderRadius.circular(8),
+      borderRadius: BorderRadius.circular(2),
     ),
     errorBorder: OutlineInputBorder(
       borderSide: const BorderSide(color: kErrorColor),
-      borderRadius: BorderRadius.circular(8),
+      borderRadius: BorderRadius.circular(2),
     ),
     focusedErrorBorder: OutlineInputBorder(
       borderSide: const BorderSide(color: kPrimaryDark),
-      borderRadius: BorderRadius.circular(8),
+      borderRadius: BorderRadius.circular(2),
     ),
   ),
   //-----------

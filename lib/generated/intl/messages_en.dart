@@ -22,11 +22,13 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "email_or_userName":
+            MessageLookupByLibrary.simpleMessage("Email / Username"),
         "forget_password":
             MessageLookupByLibrary.simpleMessage("Forget password"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
-        "invalid_id": MessageLookupByLibrary.simpleMessage(
-            "Use your Personal ID and password"),
+        "invalid_email_or_user_name":
+            MessageLookupByLibrary.simpleMessage("Invalid email or password"),
         "invalid_password":
             MessageLookupByLibrary.simpleMessage("Invalid password"),
         "login_button": MessageLookupByLibrary.simpleMessage("LOGIN"),
@@ -34,9 +36,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "more": MessageLookupByLibrary.simpleMessage("More"),
         "ok_button": MessageLookupByLibrary.simpleMessage("Ok"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
-        "personal_id": MessageLookupByLibrary.simpleMessage("Personal ID"),
         "remember_me": MessageLookupByLibrary.simpleMessage("Remember me"),
         "welcome_text": MessageLookupByLibrary.simpleMessage(
-            "Welcome to \nTanmeyah Self \nService \nApp")
+            "Welcome back our dear customer, we are glad to have you with us.")
       };
 }
