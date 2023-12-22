@@ -1,6 +1,5 @@
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'src/core/network/client/base_client.dart';
 import 'src/main_index.dart';
 Future<void> main() async {

@@ -7,11 +7,11 @@ class SlideAnimationWidget extends StatelessWidget{
   const SlideAnimationWidget({Key? key, required this.child}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-   return  FadedSlideAnimation(child,
+   return  FadedSlideAnimation(child : child,
       beginOffset: const Offset(0,1),
       endOffset: const Offset(0, 0),
-      durationInMilliseconds: 500,
-      slideDurationInMilliseconds: 800,
+      fadeDuration: Duration(milliseconds: 500),
+      slideDuration: Duration(milliseconds: 500),
       slideCurve: Curves.linearToEaseOut,);
   }
 

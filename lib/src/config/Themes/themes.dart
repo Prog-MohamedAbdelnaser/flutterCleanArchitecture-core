@@ -116,5 +116,4 @@ final kAppTheme2 =    ThemeData(
       },
     ),
     hoverColor: kPrimaryDark,
-    buttonColor: kPrimaryDark,
     focusColor: Colors.amber);
