@@ -1,41 +1,36 @@
+
+import 'dart:io';
+import 'package:flutter/material.dart';
+import 'package:softcore/src/softMaterials.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'src/core/network/client/base_client.dart';
-import 'src/main_index.dart';
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+
+
   SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
 
-  await configureDependencies();
-  injector.registerSingleton(ClientCreator(
-      interceptor: HeaderInterceptor(
-    accessToken: '',
-  )).create());
-  runApp(const MyApp());
+  runApp(const RestartWidget(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
-   const MyApp({super.key});
+  const MyApp({super.key});
+
+  // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarIconBrightness: Brightness.dark,
+    ));
+
+
+
     return GetMaterialApp(
       title: 'Flutter Demo',
-      theme: kAppTheme,
       debugShowCheckedModeBanner: false,
-      locale: Locale('ar'),
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: const [
-        Locale('en'), // English, no country code
-        Locale('ar'), // Arabic, no country code
-      ],
-      routes: Routs.routes,
-      initialRoute: Routs.intro,
+      home: Container(color: Colors.blue,),
     );
   }
 }

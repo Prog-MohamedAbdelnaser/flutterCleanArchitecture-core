@@ -690,6 +690,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
+  softcore:
+    dependency: "direct dev"
+    description:
+      path: softcore
+      relative: true
+    source: path
+    version: "0.0.1"
   source_gen:
     dependency: transitive
     description:
