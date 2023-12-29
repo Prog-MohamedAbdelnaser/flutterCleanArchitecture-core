@@ -5,10 +5,13 @@ import 'package:get/get.dart';
 import '../../main_index.dart';
 
 class LoadingView extends StatelessWidget {
+  final double ? height ;
+
+  const LoadingView({super.key,  this.height});
   @override
   Widget build(BuildContext context) {
     return Container(
-
+        height: height,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -17,9 +20,12 @@ class LoadingView extends StatelessWidget {
               SizedBox(
                 height: 30,
                 width: 30,
+/*
+                child: Image.asset('images/loading_gify.gif'),
+*/
                 child: CircularProgressIndicator(
                   strokeWidth: 3,
-                  color: context.theme.indicatorColor,
+                  color: context.theme.primaryColor,
                 ),
               ),
             ],

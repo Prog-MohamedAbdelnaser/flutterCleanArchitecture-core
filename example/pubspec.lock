@@ -693,9 +693,11 @@ packages:
   softcore:
     dependency: "direct dev"
     description:
-      path: softcore
-      relative: true
-    source: path
+      path: "."
+      ref: development
+      resolved-ref: "81b4fce26b2883971617a134e6ac5f19d8c96d06"
+      url: "https://github.com/Prog-MohamedAbdelnaser/flutterCleanArchitecture-core.git"
+    source: git
     version: "0.0.1"
   source_gen:
     dependency: transitive

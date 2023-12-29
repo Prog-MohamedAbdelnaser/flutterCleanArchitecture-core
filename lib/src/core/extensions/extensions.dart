@@ -8,7 +8,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 
 import '../exceptions/api_exception.dart';
-import '../exceptions/app_exception.dart';
 
 extension AppResource on BuildContext {
 
@@ -18,24 +17,19 @@ extension AppResource on BuildContext {
     var stringRes = AppLocalizations.of(this);
     return stringRes! ;
   }
+  Locale getLocal() {
+    Locale myLocale = Localizations.localeOf(this);
+    return myLocale;
+  }
+
+  String getLanguageCode() {
+    Locale myLocale = Localizations.localeOf(this);
+    return myLocale.languageCode;
+  }
 
   T? getArguments<T>(){
     return ModalRoute.of(this)!.settings.arguments as T;
   }
-
-
-  String handleApiErrorMessage({required dynamic exception}) {
-    String message = 'undefine_error';
-    return message;
-  }
-
-  ApiException handleApiError({required dynamic exception}) {
-    String message = 'undefine_error';
-    String code = "0";
-    print('handleApiError message ${message}');
-    return ApiException(message ,code );
-  }
-
 
 }
 

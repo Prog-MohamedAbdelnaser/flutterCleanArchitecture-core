@@ -1,10 +1,7 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import '../../main_index.dart';
 import 'package:get_it/get_it.dart';
-import 'package:injectable/injectable.dart';
+
+import '../../main_index.dart';
 
 abstract class BaseBlocWidget<T, B extends BlocBase<DataState>>
     extends BaseStatelessWidget {
@@ -18,9 +15,11 @@ abstract class BaseBlocWidget<T, B extends BlocBase<DataState>>
       return GetIt.instance.get<B>();
     }
   }
+
   B? initBloc(BuildContext context) {
     return null;
   }
+
   BaseBlocWidget({Key? key}) : super(key: key);
 
   @protected
@@ -64,8 +63,25 @@ abstract class BaseBlocWidget<T, B extends BlocBase<DataState>>
   Widget build(BuildContext context) {
     this.context = context;
     return Scaffold(
+      backgroundColor: backgroundColor(),
+      appBar: appBar(context),
       body: buildConsumer(context),
     );
+  }
+
+
+  Color backgroundColor() {
+    return Colors.transparent;
+  }
+
+  @protected
+  bool centerTitle() {
+    return true;
+  }
+
+  @protected
+  bool hasBack(BuildContext context) {
+    return Navigator.canPop(context);
   }
 
   Widget handleUiState(DataState state, BuildContext context) {
@@ -92,23 +108,18 @@ abstract class BaseBlocWidget<T, B extends BlocBase<DataState>>
       onClickReload: onClickReload,
     );
   }
-  ErrorPlaceHolderWidget placeHolderWidget( {exception,Function()? onClickReload});
 
-  void handleApiError(error,
-      {required Function(String message, String code) onHandleMessage}) {
-    final errorApi = Get.context!.handleApiError(exception: error);
-    onHandleMessage(errorApi.code, "0");
-  }
+  ErrorPlaceHolderWidget placeHolderWidget(
+      {exception, Function()? onClickReload});
 
   void handleApiErrorDialog(error, BuildContext context) {
-    dialogsManager(context).showErrorDialog(
-        context, context.handleApiErrorMessage(exception: error));
+    final errorModel = errorManager(context).prepareError(error);
+    dialogsManager(context).showErrorDialog(context, errorModel.message);
   }
 
   onClickReload() {}
 
   void onRequestSuccess(successData) {}
-
 
   BlocConsumer buildConsumer(BuildContext context) {
     this.context = context;
@@ -128,14 +139,30 @@ abstract class BaseBlocWidget<T, B extends BlocBase<DataState>>
     });
     return consumer;
   }
+
   void onBuild(BuildContext context) {}
 
   handleErrorDialogBuilder(dynamic exception) {
-    final context = Get.context! ;
-    dialogsManager(context). showErrorDialog(context, exception);
+    final context = Get.context!;
+    dialogsManager(context).showErrorDialog(context, exception);
   }
 
-  DialogsManager dialogsManager (BuildContext context);
+  DialogsManager dialogsManager(BuildContext context);
 
-
+  AppBar appBar(BuildContext context) {
+    return AppBar(
+      title: Text(
+        title(context) ?? '',
+        style: context.textTheme.titleLarge,
+      ),
+      centerTitle: centerTitle(),
+      automaticallyImplyLeading: false,
+      leading: hasBack(context)
+          ? BackButton(onPressed: () {
+              Navigator.pop(context);
+            })
+          : null,
+      backgroundColor: backgroundColor(),
+    );
+  }
 }
