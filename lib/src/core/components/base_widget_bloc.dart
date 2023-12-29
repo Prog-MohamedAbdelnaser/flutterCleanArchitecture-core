@@ -110,7 +110,9 @@ abstract class BaseBlocWidget<T, B extends BlocBase<DataState>>
   }
 
   ErrorPlaceHolderWidget placeHolderWidget(
-      {exception, Function()? onClickReload});
+      {exception, Function()? onClickReload}){
+    return ErrorPlaceHolderWidget(error: errorManager(context).prepareError(exception),onRetryButton: onClickReload,);
+  }
 
   void handleApiErrorDialog(error, BuildContext context) {
     final errorModel = errorManager(context).prepareError(error);
