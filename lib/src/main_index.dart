@@ -8,5 +8,4 @@ export 'package:flutter_bloc/flutter_bloc.dart';
 export 'package:flutter_svg/flutter_svg.dart';
 export 'package:flutter/material.dart';
 export 'core/bloc/base_cubit.dart';
-export 'package:flutter_gen/gen_l10n/app_localizations.dart';
 export 'package:flutter_localizations/flutter_localizations.dart';

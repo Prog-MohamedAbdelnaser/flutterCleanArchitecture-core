@@ -38,7 +38,7 @@ abstract class DialogsManager {
               Navigator.pop(context);
             }
           },
-          child: Text(buttonName ?? context.getStrings().ok_button,
+          child: Text(buttonName ??'ok',
               style: context.textTheme.titleMedium?.copyWith(color: context.theme.primaryColor)),
         )
       ],
@@ -100,7 +100,7 @@ abstract class DialogsManager {
             onConfirm();
           },
           child: Text(
-            buttonName ?? context.getStrings().ok_button,
+            buttonName ?? 'ok',
             style: context.textTheme.bodyMedium?.copyWith(color: context.theme.primaryColor, fontSize: 14),
           ),
         ),

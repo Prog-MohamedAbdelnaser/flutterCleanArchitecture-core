@@ -6,7 +6,7 @@ import '/src/core/dialogs/progress_dialog.dart';
 import '/src/main_index.dart';
 abstract class BaseStatelessWidget extends StatelessWidget {
   final gContext = Get.context;
-  final strings = Get.context!.getStrings();
+
   final local = Get.locale?.languageCode ?? 'en';
   final textTheme = Get.context!.textTheme;
 
