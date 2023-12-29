@@ -1,3 +1,4 @@
+export 'app_error.dart';
 
 class AppError{
   final String  ? title ;

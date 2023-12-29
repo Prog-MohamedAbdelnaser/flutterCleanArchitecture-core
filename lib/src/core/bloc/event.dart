@@ -1,7 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../resources/data_state.dart';
+import 'data_state.dart';
 
 @immutable
 abstract class BaseEvents {

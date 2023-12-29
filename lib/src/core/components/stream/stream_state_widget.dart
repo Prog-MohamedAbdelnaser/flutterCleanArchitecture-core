@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../core/components/common/common_state.dart';
 import '../../../softMaterials.dart';
-import '../../resources/data_state.dart';
+import '../../bloc/data_state.dart';
 
 class StreamStateWidget<T> extends BaseStatelessWidget {
   final Widget Function(BuildContext context, T data) builder;

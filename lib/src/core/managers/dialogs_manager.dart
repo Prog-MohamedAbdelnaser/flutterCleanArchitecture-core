@@ -2,13 +2,14 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import '/src/core/dialogs/progress_dialog.dart';
 import '../../main_index.dart';
-
-
-abstract class DialogsManager {
+export 'dialogs_manager.dart';
+ class DialogsManager {
   static CustomProgressDialog createProgress(BuildContext context) {
     return ProgressDialog.createProgress(context,);
   }
-   showSuccessfullyAnimDialog(BuildContext context, {required Function onDismiss, String? message});
+   showSuccessfullyAnimDialog(BuildContext context, {required Function() onDismiss, String? message}){
+     showMessageDialog(context,message??'',onDismiss:onDismiss);
+   }
 
    showCustomDialog(BuildContext context, Widget content,
       {Color? barrierColor}) {
@@ -20,13 +21,14 @@ abstract class DialogsManager {
         builder: (_) => content);
   }
 
-   showErrorDialog(
+   showMessageDialog(
       BuildContext context,
       String text, {
         String? iconPath,
         bool cancelable = true,
         String? buttonName,
         Function()? onClick,
+        Function()? onDismiss,
       }) {
     AlertDialog alert = AlertDialog(
       actions: [

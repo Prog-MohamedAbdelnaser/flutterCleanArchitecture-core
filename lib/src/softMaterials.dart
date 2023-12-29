@@ -1,3 +1,5 @@
+library softMaterials;
+
 export 'core/extensions/extensions.dart';
 export 'core/components/base_stateless_widget.dart';
 export 'core/components/base_widget_bloc.dart';

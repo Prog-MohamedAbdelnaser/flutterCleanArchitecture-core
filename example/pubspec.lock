@@ -702,8 +702,8 @@ packages:
     dependency: "direct dev"
     description:
       path: "."
-      ref: release1
-      resolved-ref: cca352ab9f5e09db79f74f6125d417565067b90a
+      ref: development
+      resolved-ref: a7ae5c506e1ac6ab10cf8f2d368219476e82733a
       url: "https://github.com/Prog-MohamedAbdelnaser/flutterCleanArchitecture-core.git"
     source: git
     version: "0.0.1"

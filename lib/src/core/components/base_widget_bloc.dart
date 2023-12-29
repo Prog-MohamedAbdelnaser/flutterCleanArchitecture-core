@@ -114,7 +114,7 @@ abstract class BaseBlocWidget<T, B extends BlocBase<DataState>>
 
   void handleApiErrorDialog(error, BuildContext context) {
     final errorModel = errorManager(context).prepareError(error);
-    dialogsManager(context).showErrorDialog(context, errorModel.message);
+    dialogsManager(context).showMessageDialog(context, errorModel.message);
   }
 
   onClickReload() {}
@@ -144,10 +144,12 @@ abstract class BaseBlocWidget<T, B extends BlocBase<DataState>>
 
   handleErrorDialogBuilder(dynamic exception) {
     final context = Get.context!;
-    dialogsManager(context).showErrorDialog(context, exception);
+    dialogsManager(context).showMessageDialog(context, exception);
   }
 
-  DialogsManager dialogsManager(BuildContext context);
+  DialogsManager dialogsManager(BuildContext context){
+    return DialogsManager();
+  }
 
   AppBar appBar(BuildContext context) {
     return AppBar(

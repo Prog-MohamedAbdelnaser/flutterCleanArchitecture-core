@@ -8,6 +8,7 @@ import '../../main_index.dart';
 import '../exceptions/api_exception.dart';
 import '../exceptions/app_base_exception.dart';
 import 'app_error.dart';
+
 class ErrorHandlerManager {
   final BuildContext context;
   ErrorHandlerManager(this.context);
