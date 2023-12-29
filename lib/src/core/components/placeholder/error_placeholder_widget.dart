@@ -1,4 +1,4 @@
-import '/src/main_index.dart';
+import '../../../../main_index.dart';
 import '../../managers/app_error.dart';
 import '../../managers/error_handler_manage.dart';
 import '../buttons/app_cupertino_button.dart';

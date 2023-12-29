@@ -4,7 +4,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 
-import '../../main_index.dart';
+import '../../../main_index.dart';
 import '../exceptions/api_exception.dart';
 import '../exceptions/app_base_exception.dart';
 import 'app_error.dart';

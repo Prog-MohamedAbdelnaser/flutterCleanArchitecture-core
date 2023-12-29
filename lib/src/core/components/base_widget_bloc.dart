@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:get_it/get_it.dart';
 
-import '../../main_index.dart';
+import '../../../main_index.dart';
 
 abstract class BaseBlocWidget<T, B extends BlocBase<DataState>>
     extends BaseStatelessWidget {

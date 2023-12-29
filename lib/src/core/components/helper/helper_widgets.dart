@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-import '/src/main_index.dart';
+import '../../../../main_index.dart';
 import '../drop_down/slide_animation.dart';
 import '../text_field/material_text_field.dart';
 

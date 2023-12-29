@@ -2,7 +2,7 @@
 
 import 'package:get/get.dart';
 
-import '../../main_index.dart';
+import '../../../main_index.dart';
 
 class LoadingView extends StatelessWidget {
   final double ? height ;

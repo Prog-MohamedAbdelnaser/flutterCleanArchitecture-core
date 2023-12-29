@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:get/get.dart';
 import '../managers/error_handler_manage.dart';
 import '/src/core/dialogs/progress_dialog.dart';
-import '/src/main_index.dart';
+import '../../../main_index.dart';
 abstract class BaseStatelessWidget extends StatelessWidget {
   final gContext = Get.context;
 

@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-import '../../../main_index.dart';
+import '../../../../main_index.dart';
 
 class BottomNavigationWidget extends StatefulWidget {
   final List<BottomNavigationWidgetModel> items;

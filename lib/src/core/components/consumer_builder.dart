@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../main_index.dart';
+import '../../../main_index.dart';
 import 'base_stateless_widget.dart';
 
 class ConsumerBuilder extends StatelessWidget{
