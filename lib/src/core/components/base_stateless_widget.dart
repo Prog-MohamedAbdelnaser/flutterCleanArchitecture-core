@@ -11,7 +11,7 @@ abstract class BaseStatelessWidget extends StatelessWidget {
   final textTheme = Get.context!.textTheme;
 
   //static String routeName (){return '';}
-
+  
   final CustomProgressDialog progress =
       DialogsManager.createProgress(Get.context!);
 
@@ -27,6 +27,7 @@ abstract class BaseStatelessWidget extends StatelessWidget {
   ErrorHandlerManager errorManager(BuildContext context) {
     return ErrorHandlerManager(context);
   }
+
 
 
 

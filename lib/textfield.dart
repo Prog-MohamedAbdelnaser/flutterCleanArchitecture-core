@@ -1,0 +1,1 @@
+export 'package:softcore/src/core/components/text_field/material_text_field.dart';
