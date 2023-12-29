@@ -6,7 +6,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-export 'extensions.dart';
 extension AppResource on BuildContext {
 
   InputDecoration inputDecoration() => const InputDecoration().applyDefaults(theme.inputDecorationTheme);

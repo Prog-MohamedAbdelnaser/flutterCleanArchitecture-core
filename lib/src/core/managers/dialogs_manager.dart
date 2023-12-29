@@ -1,7 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import '/src/core/dialogs/progress_dialog.dart';
 import '../../../main_index.dart';
+import '/src/core/dialogs/progress_dialog.dart';
 export 'dialogs_manager.dart';
  class DialogsManager {
   static CustomProgressDialog createProgress(BuildContext context) {

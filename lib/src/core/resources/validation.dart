@@ -1,4 +1,3 @@
-export 'validation.dart';
 class Validation {
   //"^5(\\d{8})\$"
   static bool isValidPhone(String phone) =>
