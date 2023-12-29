@@ -1,5 +1,6 @@
 export 'core/extensions/extensions.dart';
 export 'core/components/base_stateless_widget.dart';
+export 'core/components/base_widget_bloc.dart';
 export 'core/managers/dialogs_manager.dart';
 export 'core/components/placeholder/error_placeholder_widget.dart';
 export 'core/components/loading_widget.dart';
