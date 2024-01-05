@@ -48,7 +48,7 @@ dev_dependencies:
   injectable_generator:
   json_serializable: ^6.7.1
   softcore :
-    git:
-      url: https://github.com/Prog-MohamedAbdelnaser/flutterCleanArchitecture-core.git
-      ref: development # branch name
-#  path : softcore
+    #git:
+    #  url: https://github.com/Prog-MohamedAbdelnaser/flutterCleanArchitecture-core.git
+    #  ref: development # branch name
+    path : ../../softcore

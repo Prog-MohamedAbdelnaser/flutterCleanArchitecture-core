@@ -39,7 +39,7 @@ class MaterialTextField extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 8),
             child: Text(
               title ?? '',
-              style: context.textTheme.labelMedium),
+              style: context.textTheme.bodyMedium),
           ) : const SizedBox(),
           Row(
             children: [
@@ -62,7 +62,7 @@ class MaterialTextField extends StatelessWidget {
                   obscureText: obscureText==true,
                   onChanged:onChanged,
                   keyboardType: keyboardType,
-                  decoration: inputDecoration!=null ? inputDecoration! :context.inputDecoration(),
+                  decoration: inputDecoration!=null ? inputDecoration! :context.inputDecoration().copyWith(label: Text('data')),
                 ),
               ),
             ],
