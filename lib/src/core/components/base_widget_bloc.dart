@@ -39,7 +39,7 @@ abstract class BaseBlocWidget<T, B extends BlocBase<DataState>>
 
     if (state is SuccessStateListener) {
       dismissProgress();
-      onRequestSuccess(state.data);
+      onRequestSuccess(context , state.data);
     }
   }
 
@@ -121,7 +121,7 @@ abstract class BaseBlocWidget<T, B extends BlocBase<DataState>>
 
   onClickReload() {}
 
-  void onRequestSuccess(successData) {}
+  void onRequestSuccess(BuildContext context , successData) {}
 
   BlocConsumer buildConsumer(BuildContext context) {
     this.context = context;
