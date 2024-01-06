@@ -85,15 +85,16 @@ class BottomNavigationWidgetModel {
   final Widget widget;
   final String label;
   final String? iconPath;
+  final Widget? icon;
   final double? iconSize;
   
   
   final Widget Function(bool selected)? iconBuilder;
 
   BottomNavigationWidgetModel(
-      {required this.widget, required this.label, this.iconPath, this.iconBuilder,this.iconSize})
-      : assert(iconBuilder == null || iconPath == null,
-            'Cannot provide both a iconBuilder and a icon');
+      {required this.widget, required this.label, this.iconPath, this.iconBuilder,this.iconSize,this.icon})
+      : assert(iconBuilder == null || iconPath == null|| icon == null,
+            'Cannot provide both a iconBuilder , iconPath and icon');
 
   BottomNavigationItemBuilder builder(bool selected, BuildContext context,EdgeInsetsGeometry ? itemsPadding) {
     return BottomNavigationItemBuilder(
@@ -110,14 +111,16 @@ class BottomNavigationItemBuilder extends BottomNavigationBarItem {
       BottomNavigationWidgetModel model, BuildContext context, [bool? selected,EdgeInsetsGeometry ? itemsPadding])
       : super(
             icon: Padding(
-              padding: itemsPadding?? EdgeInsets.all(8),
+              padding: itemsPadding?? const EdgeInsets.all(8),
               child: _buildItem(model,selected==true,context),
             ),
             label: model.label);
 
  static Widget _buildItem( BottomNavigationWidgetModel model,bool selected,BuildContext context) {
     return model.iconBuilder != null
-        ? model.iconBuilder!(selected==true)
+        ? model.iconBuilder!(selected==true):
+    model.icon != null
+        ? model.icon!
         : model.iconPath!.endsWith('svg') == true
         ? SvgPicture.asset(
       model.iconPath!,
