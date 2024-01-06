@@ -5,9 +5,21 @@ import '../../../main_index.dart';
 class BottomNavigationWidget extends StatefulWidget {
   final List<BottomNavigationWidgetModel> items;
   final AppBar? appBar;
-  final Color ?backgroundColor ;
+  final Color? backgroundColor;
 
-  const BottomNavigationWidget({Key? key, required this.items, this.appBar,this.backgroundColor})
+  final Color? barColor;
+  final double? barElevation;
+
+  final Widget Function(BuildContext context, Widget bar)? builder;
+
+  const BottomNavigationWidget(
+      {Key? key,
+      required this.items,
+      this.appBar,
+      this.backgroundColor,
+      this.barColor,
+      this.builder,
+      this.barElevation})
       : super(key: key);
 
   @override
@@ -38,33 +50,33 @@ class BottomNavigationState extends State<BottomNavigationWidget> {
           child: widget.items.elementAt(_selectedIndex).widget,
         ),
       ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: ClipRRect(
-          borderRadius: const BorderRadius.all(Radius.circular(15)),
-          child: BottomNavigationBar(
-            type: BottomNavigationBarType.fixed,
-            // This is all you need!
-            backgroundColor: Colors.white,
+      bottomNavigationBar: widget.builder != null
+          ? widget.builder!(context, navigations())
+          : navigations(),
+    );
+  }
 
-            unselectedItemColor: context.theme.unselectedWidgetColor,
-            showSelectedLabels: true,
-            showUnselectedLabels: true,
-            selectedIconTheme: context.theme.iconTheme,
-            selectedLabelStyle: context.textTheme.bodyMedium!
-                .copyWith(color: context.theme.primaryColor),
-            unselectedLabelStyle: context.textTheme.labelMedium
-                ?.copyWith(color: context.theme.unselectedWidgetColor),
-            items: widget.items
-                .map(
-                    (e) => e.builder(_selectedIndex == widget.items.indexOf(e),context))
-                .toList(),
-            currentIndex: _selectedIndex,
-            selectedItemColor: context.theme.primaryColor,
-            onTap: _onItemTapped,
-          ),
-        ),
-      ),
+  Widget navigations() {
+    return BottomNavigationBar(
+      type: BottomNavigationBarType.fixed,
+      // This is all you need!
+      backgroundColor: widget.barColor ?? Colors.white,
+      elevation: widget.barElevation,
+      unselectedItemColor: context.theme.unselectedWidgetColor,
+      showSelectedLabels: true,
+      showUnselectedLabels: true,
+      selectedIconTheme: context.theme.iconTheme,
+      selectedLabelStyle: context.textTheme.bodyMedium!
+          .copyWith(color: context.theme.primaryColor),
+      unselectedLabelStyle: context.textTheme.labelMedium
+          ?.copyWith(color: context.theme.unselectedWidgetColor),
+      items: widget.items
+          .map((e) =>
+              e.builder(_selectedIndex == widget.items.indexOf(e), context))
+          .toList(),
+      currentIndex: _selectedIndex,
+      selectedItemColor: context.theme.primaryColor,
+      onTap: _onItemTapped,
     );
   }
 }
