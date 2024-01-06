@@ -10,7 +10,7 @@ export 'src/core/components/restart_app_widget.dart';
 export 'src/core/components/buttons/app_cupertino_button.dart';
 export 'src/core/components/buttons/app_icon.dart';
 export 'src/core/components/buttons/outlint_button.dart';
-export 'src/core/components/buttons/bottom_navigation_widget.dart';
+export 'src/core/components/bottom_navigation_widget.dart';
 export 'src/core/components/buttons/options_menu_button.dart';
 export 'src/core/components/buttons/app_icon_button.dart';
 export 'src/core/components/text_field/material_text_field.dart';

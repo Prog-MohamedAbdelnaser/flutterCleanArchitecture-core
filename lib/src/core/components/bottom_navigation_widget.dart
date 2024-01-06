@@ -1,12 +1,13 @@
 import 'package:get/get.dart';
 
-import '../../../../main_index.dart';
+import '../../../main_index.dart';
 
 class BottomNavigationWidget extends StatefulWidget {
   final List<BottomNavigationWidgetModel> items;
   final AppBar? appBar;
+  final Color ?backgroundColor ;
 
-  const BottomNavigationWidget({Key? key, required this.items, this.appBar})
+  const BottomNavigationWidget({Key? key, required this.items, this.appBar,this.backgroundColor})
       : super(key: key);
 
   @override
@@ -31,6 +32,7 @@ class BottomNavigationState extends State<BottomNavigationWidget> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: widget.appBar,
+      backgroundColor: widget.backgroundColor,
       body: SafeArea(
         child: Center(
           child: widget.items.elementAt(_selectedIndex).widget,
