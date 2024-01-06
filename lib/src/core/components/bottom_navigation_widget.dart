@@ -8,7 +8,9 @@ class BottomNavigationWidget extends StatefulWidget {
   final Color? backgroundColor;
   final Color? barColor;
   final double? barElevation;
-  final EdgeInsetsGeometry?  itemsPadding ;
+  final EdgeInsetsGeometry? itemsPadding;
+
+
   final Widget Function(BuildContext context, Widget bar)? builder;
 
   const BottomNavigationWidget(
@@ -71,8 +73,8 @@ class BottomNavigationState extends State<BottomNavigationWidget> {
       unselectedLabelStyle: context.textTheme.labelMedium
           ?.copyWith(color: context.theme.unselectedWidgetColor),
       items: widget.items
-          .map((e) =>
-              e.builder(_selectedIndex == widget.items.indexOf(e), context,widget.itemsPadding))
+          .map((e) => e.builder(_selectedIndex == widget.items.indexOf(e),
+              context, widget.itemsPadding))
           .toList(),
       currentIndex: _selectedIndex,
       selectedItemColor: context.theme.primaryColor,
@@ -87,51 +89,57 @@ class BottomNavigationWidgetModel {
   final String? iconPath;
   final Widget? icon;
   final double? iconSize;
-  
-  
+
   final Widget Function(bool selected)? iconBuilder;
 
   BottomNavigationWidgetModel(
-      {required this.widget,  this.label, this.iconPath, this.iconBuilder,this.iconSize,this.icon})
-      : assert(iconBuilder == null || iconPath == null|| icon == null,
+      {required this.widget,
+      this.label,
+      this.iconPath,
+      this.iconBuilder,
+      this.iconSize,
+      this.icon})
+      : assert(iconBuilder == null || iconPath == null || icon == null,
             'Cannot provide both a iconBuilder , iconPath and icon');
 
-  BottomNavigationItemBuilder builder(bool selected, BuildContext context,EdgeInsetsGeometry ? itemsPadding) {
-    return BottomNavigationItemBuilder(
-      this,
-      context,
-      selected,
-      itemsPadding
-    );
+  BottomNavigationItemBuilder builder(
+      bool selected, BuildContext context, EdgeInsetsGeometry? itemsPadding) {
+    return BottomNavigationItemBuilder(this, context, selected, itemsPadding);
   }
 }
 
 class BottomNavigationItemBuilder extends BottomNavigationBarItem {
   BottomNavigationItemBuilder(
-      BottomNavigationWidgetModel model, BuildContext context, [bool? selected,EdgeInsetsGeometry ? itemsPadding])
+      BottomNavigationWidgetModel model, BuildContext context,
+      [bool? selected, EdgeInsetsGeometry? itemsPadding])
       : super(
             icon: Padding(
-              padding: itemsPadding?? const EdgeInsets.all(8),
-              child: _buildItem(model,selected==true,context),
+              padding: itemsPadding ?? const EdgeInsets.all(8),
+              child: _buildItem(model, selected == true, context),
             ),
             label: model.label);
 
- static Widget _buildItem( BottomNavigationWidgetModel model,bool selected,BuildContext context) {
+  static Widget _buildItem(
+      BottomNavigationWidgetModel model, bool selected, BuildContext context) {
     return model.iconBuilder != null
-        ? model.iconBuilder!(selected==true):
-    model.icon != null
-        ? model.icon!
-        : model.iconPath!.endsWith('svg') == true
-        ? SvgPicture.asset(
-      model.iconPath!,
-      height: model.iconSize??24,
-      colorFilter: selected == true
-          ? ColorFilter.mode(
-          context.theme.primaryColor, BlendMode.color)
-          : ColorFilter.mode(
-          context.theme.unselectedWidgetColor,
-          BlendMode.color),
-    )
-        : Image.asset(model.iconPath!);
+        ? model.iconBuilder!(selected == true)
+        : model.icon != null
+            ? model.icon!
+            : model.iconPath!.endsWith('svg') == true
+                ? SvgPicture.asset(
+                    model.iconPath!,
+                    height: model.iconSize ?? 24,
+                    colorFilter: selected == true
+                        ? ColorFilter.mode(
+                            context.theme.primaryColor, BlendMode.clear)
+                        : ColorFilter.mode(context.theme.unselectedWidgetColor,
+                            BlendMode.color),
+                  )
+                : Image.asset(
+                    model.iconPath!,
+                    color: selected == true
+                        ? context.theme.primaryColor
+                        : context.theme.unselectedWidgetColor,
+                  );
   }
 }
