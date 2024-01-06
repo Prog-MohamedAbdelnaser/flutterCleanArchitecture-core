@@ -19,7 +19,7 @@ class BottomNavigationWidget extends StatefulWidget {
 class BottomNavigationState extends State<BottomNavigationWidget> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  int _selectedIndex = 3;
+  int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
     setState(() {
