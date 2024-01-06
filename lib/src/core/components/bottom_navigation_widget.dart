@@ -92,7 +92,7 @@ class BottomNavigationWidgetModel {
   final Widget Function(bool selected)? iconBuilder;
 
   BottomNavigationWidgetModel(
-      {required this.widget, required this.label, this.iconPath, this.iconBuilder,this.iconSize,this.icon})
+      {required this.widget,  this.label, this.iconPath, this.iconBuilder,this.iconSize,this.icon})
       : assert(iconBuilder == null || iconPath == null|| icon == null,
             'Cannot provide both a iconBuilder , iconPath and icon');
 
