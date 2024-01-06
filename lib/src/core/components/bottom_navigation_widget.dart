@@ -83,7 +83,7 @@ class BottomNavigationState extends State<BottomNavigationWidget> {
 
 class BottomNavigationWidgetModel {
   final Widget widget;
-  final String label;
+  final String? label;
   final String? iconPath;
   final Widget? icon;
   final double? iconSize;
