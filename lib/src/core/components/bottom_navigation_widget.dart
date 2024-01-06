@@ -131,9 +131,9 @@ class BottomNavigationItemBuilder extends BottomNavigationBarItem {
                     height: model.iconSize ?? 24,
                     colorFilter: selected == true
                         ? ColorFilter.mode(
-                            context.theme.primaryColor, BlendMode.clear)
+                            context.theme.primaryColor, BlendMode.srcIn)
                         : ColorFilter.mode(context.theme.unselectedWidgetColor,
-                            BlendMode.color),
+                            BlendMode.srcIn),
                   )
                 : Image.asset(
                     model.iconPath!,
