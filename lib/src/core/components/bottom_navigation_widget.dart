@@ -9,7 +9,7 @@ class BottomNavigationWidget extends StatefulWidget {
   final Color? barColor;
   final double? barElevation;
   final EdgeInsetsGeometry? itemsPadding;
-
+  final bool   useSafeArea ;
 
   final Widget Function(BuildContext context, Widget bar)? builder;
 
@@ -21,6 +21,7 @@ class BottomNavigationWidget extends StatefulWidget {
       this.backgroundColor,
       this.barColor,
       this.builder,
+        this.useSafeArea =true,
       this.barElevation})
       : super(key: key);
 
@@ -47,11 +48,9 @@ class BottomNavigationState extends State<BottomNavigationWidget> {
       key: _scaffoldKey,
       appBar: widget.appBar,
       backgroundColor: widget.backgroundColor,
-      body: SafeArea(
-        child: Center(
-          child: widget.items.elementAt(_selectedIndex).widget,
-        ),
-      ),
+      body:widget.useSafeArea==true?  SafeArea(
+        child: widget.items.elementAt(_selectedIndex).widget,
+      ):widget.items.elementAt(_selectedIndex).widget,
       bottomNavigationBar: widget.builder != null
           ? widget.builder!(context, navigations())
           : navigations(),

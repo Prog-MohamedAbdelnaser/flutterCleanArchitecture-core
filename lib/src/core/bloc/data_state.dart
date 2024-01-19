@@ -1,9 +1,6 @@
 
 abstract class DataState<T> {
-  final T ? data;
-  final dynamic error;
 
-  const DataState({this.data, this.error});
 }
 
 class UnInitState extends DataState {}
@@ -12,13 +9,14 @@ class UnInitState extends DataState {}
  * this state for observe state with bloc listeners
  **/
 abstract class DataStateFListener<T> extends DataState<T> {
-  const DataStateFListener({data, error}):super(data: data,error: error);
+
 }
 
 class LoadingStateListener extends DataStateFListener {}
 
 class FailureStateListener extends DataStateFListener {
-  FailureStateListener(error):super(error: error);
+  final dynamic error ;
+  FailureStateListener(this. error);
 }
 
 class SuccessStateListener<T> extends DataStateFListener<T> {
@@ -34,15 +32,17 @@ class SuccessStateListener<T> extends DataStateFListener<T> {
  **/
 
 abstract class DataStateFBuilder<T> extends DataState<T> {
-  const DataStateFBuilder({data, error}):super(data: data,error: error);
+
 }
 
 class DataFailed<T> extends DataStateFBuilder<T> {
-  const DataFailed(error) : super(error: error);
+  final dynamic error ;
+   DataFailed(this.error) ;
 }
 
 class DataSuccess<T> extends DataStateFBuilder<T> {
-  const DataSuccess(T data) : super(data: data);
+  final T data ;
+   DataSuccess( this. data);
 }
 
 class DataLoading extends DataStateFBuilder {}
