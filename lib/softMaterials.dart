@@ -16,6 +16,8 @@ export 'src/core/components/buttons/app_icon_button.dart';
 export 'src/core/components/text_field/material_text_field.dart';
 export 'src/core/components/texts/material_text.dart';
 export 'src/core/components/texts/row_rich_texts.dart';
+export 'src/core/components/helper/helper_widgets.dart' ;
+export 'src/core/components/helper/image_builder.dart' ;
 export 'basebloc.dart';
 export 'errorManager.dart';
 export 'package:flutter_localizations/flutter_localizations.dart';
