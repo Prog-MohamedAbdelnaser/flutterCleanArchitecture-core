@@ -1,6 +1,6 @@
 class Item {
-  int index;
+  int id;
   final String value;
   final String? description;
-  Item({required this.index, required this.value , this.description});
+  Item({required this.id, required this.value , this.description});
 }
