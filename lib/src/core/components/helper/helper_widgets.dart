@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../../../../main_index.dart';
-import '../drop_down/slide_animation.dart';
+import '../slide_animation.dart';
 import '../text_field/material_text_field.dart';
 
 

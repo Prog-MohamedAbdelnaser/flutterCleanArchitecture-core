@@ -54,6 +54,7 @@ abstract class BaseCubit extends Cubit<DataState>{
       onSuccess(response);
     } catch (e) {
       emit(FailureStateListener(e));
+      rethrow ;
     }
   }
 

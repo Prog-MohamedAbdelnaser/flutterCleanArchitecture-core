@@ -59,16 +59,25 @@ abstract class BaseBlocWidget<T, B extends BlocBase<DataState>>
     return null;
   }
 
+
   @override
   Widget build(BuildContext context) {
     this.context = context;
+    return safeArea() ? SafeArea(
+      child: scaffoldBody()
+    ):scaffoldBody();
+  }
+
+  Widget scaffoldBody(){
     return Scaffold(
       backgroundColor: backgroundColor(),
-      appBar: appBar(context),
+      appBar: title(context)==null ?null:  appBar(context),
       body: buildConsumer(context),
     );
   }
-
+  bool safeArea(){
+    return true ;
+  }
 
   Color backgroundColor() {
     return Colors.transparent;
@@ -153,7 +162,7 @@ abstract class BaseBlocWidget<T, B extends BlocBase<DataState>>
     return DialogsManager();
   }
 
-  AppBar appBar(BuildContext context) {
+  AppBar  ? appBar(BuildContext context) {
     return AppBar(
       title: Text(
         title(context) ?? '',
