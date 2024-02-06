@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../base_stateless_widget.dart';
+import '../material_stateless_widget.dart';
 import '../decorations/decorations.dart';
 import '../helper/image_builder.dart';
 import '../text_field/material_text_field.dart';

@@ -3,7 +3,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import '/src/core/managers/dialogs_manager.dart';
 
-import '../base_stateless_widget.dart';
+import '../material_stateless_widget.dart';
 
 class OptionsMenuButton extends MaterialStatelessWidget {
   final List<Widget>? options;

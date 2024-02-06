@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '/src/core/extensions/extensions.dart';
-import '../base_stateless_widget.dart';
+import '../material_stateless_widget.dart';
 import '../common/common_state.dart';
 import '../helper/helper_widgets.dart';
 import '../text_field/material_text_field.dart';
