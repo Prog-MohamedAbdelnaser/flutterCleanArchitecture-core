@@ -4,7 +4,7 @@ import '../../../core/components/common/common_state.dart';
 import '../../../../softMaterials.dart';
 import '../../bloc/data_state.dart';
 
-class StreamStateWidget<T> extends BaseStatelessWidget {
+class StreamStateWidget<T> extends MaterialStatelessWidget {
   final Widget Function(BuildContext context, T data) builder;
   final Widget Function(BuildContext context, Widget child)? preLoadingBuilder;
   final Widget Function(BuildContext context, dynamic error)? errorBuilder;
@@ -50,7 +50,7 @@ class StreamStateWidget<T> extends BaseStatelessWidget {
   }
 }
 
-class StreamDataStateWidget<T> extends BaseStatelessWidget {
+class StreamDataStateWidget<T> extends MaterialStatelessWidget {
   final Widget Function(BuildContext context, T data) builder;
   final Widget Function(BuildContext context, Widget child)? preLoadingBuilder;
   final Widget Function(BuildContext context, Widget child, dynamic error)?

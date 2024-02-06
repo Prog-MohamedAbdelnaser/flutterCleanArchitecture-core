@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import '../managers/error_handler_manage.dart';
 import '/src/core/dialogs/progress_dialog.dart';
 import '../../../main_index.dart';
-abstract class BaseStatelessWidget extends StatelessWidget {
+abstract class MaterialStatelessWidget extends StatelessWidget {
   final gContext = Get.context;
 
   final local = Get.locale?.languageCode ?? 'en';
@@ -17,7 +17,7 @@ abstract class BaseStatelessWidget extends StatelessWidget {
 
   bool isRtl() => local == 'ar';
 
-  BaseStatelessWidget({Key? key}):  super(key: key);
+  MaterialStatelessWidget({Key? key}):  super(key: key);
 
 
   T? getArguments<T>(BuildContext context ){

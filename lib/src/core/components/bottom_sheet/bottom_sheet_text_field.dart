@@ -8,7 +8,7 @@ import '../text_field/material_text_field.dart';
 import 'common_list_item.dart';
 import 'list_picker_widget.dart';
 
-class BottomSheetTextField extends BaseStatelessWidget {
+class BottomSheetTextField extends MaterialStatelessWidget {
   final String? title;
   final String? initValue;
   final String? hint;

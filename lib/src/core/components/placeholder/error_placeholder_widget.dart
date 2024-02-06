@@ -4,7 +4,7 @@ import '../../managers/error_handler_manage.dart';
 import '../buttons/app_cupertino_button.dart';
 
 // ignore: must_be_immutable
-class ErrorPlaceHolderWidget extends BaseStatelessWidget {
+class ErrorPlaceHolderWidget extends MaterialStatelessWidget {
   final String? title;
   final Function()? onRetryButton;
   final Function()? onCallBack;

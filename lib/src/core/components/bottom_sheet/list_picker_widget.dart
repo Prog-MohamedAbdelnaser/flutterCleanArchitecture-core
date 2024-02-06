@@ -8,7 +8,7 @@ import '../helper/helper_widgets.dart';
 import '../text_field/material_text_field.dart';
 import 'common_list_item.dart';
 
-class ListPickerWidget extends BaseStatelessWidget {
+class ListPickerWidget extends MaterialStatelessWidget {
   static showPicker(
       {required BuildContext context,
       bool? setSearch,

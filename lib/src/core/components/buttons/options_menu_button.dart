@@ -5,7 +5,7 @@ import '/src/core/managers/dialogs_manager.dart';
 
 import '../base_stateless_widget.dart';
 
-class OptionsMenuButton extends BaseStatelessWidget {
+class OptionsMenuButton extends MaterialStatelessWidget {
   final List<Widget>? options;
   final List<String>? optionsString;
   final Widget? title;

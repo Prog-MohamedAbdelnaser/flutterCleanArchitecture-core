@@ -3,8 +3,8 @@ import 'package:get_it/get_it.dart';
 
 import '../../../main_index.dart';
 
-abstract class BaseBlocWidget<T, B extends BlocBase<DataState>>
-    extends BaseStatelessWidget {
+abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
+    extends MaterialStatelessWidget {
   late BuildContext context;
   late B bloc = getBloc();
 
@@ -20,7 +20,7 @@ abstract class BaseBlocWidget<T, B extends BlocBase<DataState>>
     return null;
   }
 
-  BaseBlocWidget({Key? key}) : super(key: key);
+  MaterialBlocWidget({Key? key}) : super(key: key);
 
   @protected
   Widget buildWidget(BuildContext context, T state);
