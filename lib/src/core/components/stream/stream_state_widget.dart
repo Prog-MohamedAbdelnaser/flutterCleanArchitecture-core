@@ -6,7 +6,7 @@ class StreamStateWidget<T> extends MaterialStatelessWidget {
   final Widget Function(BuildContext context, T data) builder;
   final Widget Function(BuildContext context)? preLoadingBuilder;
   final Widget Function(BuildContext context, dynamic error)? errorBuilder;
-  final StreamState<T> stream;
+  final StreamState<T?> stream;
   final Function()? onReload;
 
   StreamStateWidget({
@@ -20,7 +20,7 @@ class StreamStateWidget<T> extends MaterialStatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<T>(
+    return StreamBuilder<T?>(
         stream: stream.stream,
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.active) {
