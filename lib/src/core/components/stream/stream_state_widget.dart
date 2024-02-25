@@ -4,7 +4,7 @@ import '../../bloc/data_state.dart';
 
 class StreamStateWidget<T> extends MaterialStatelessWidget {
   final Widget Function(BuildContext context, T data) builder;
-  final Widget Function(BuildContext context, Widget child)? preLoadingBuilder;
+  final Widget Function(BuildContext context)? preLoadingBuilder;
   final Widget Function(BuildContext context, dynamic error)? errorBuilder;
   final StreamState<T> stream;
   final Function()? onReload;
@@ -29,9 +29,9 @@ class StreamStateWidget<T> extends MaterialStatelessWidget {
           if (snapshot.data != null) {
             return builder(context, snapshot.data as T);
           } else if (snapshot.error != null) {
-            return handleApiErrorPlaceHolder(context, snapshot.error, onClickReload: onReload);
+            return errorBuilder!=null ? errorBuilder!(context,snapshot.error):  handleApiErrorPlaceHolder(context, snapshot.error, onClickReload: onReload);
           }
-          return const LoadingView(height: 150,);
+          return preLoadingBuilder !=null ? preLoadingBuilder!(context): const  LoadingView(height: 150,);
         });
   }
 

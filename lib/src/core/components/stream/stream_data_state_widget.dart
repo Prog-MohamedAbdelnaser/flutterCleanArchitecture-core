@@ -5,18 +5,19 @@ import '../../bloc/data_state.dart';
 
 class StreamDataStateWidget<T> extends MaterialStatelessWidget {
   final Widget Function(BuildContext context, T data) builder;
-  final Widget Function(BuildContext context, Widget child)? preLoadingBuilder;
-  final Widget Function(BuildContext context, Widget child, dynamic error)?
-      errorBuilder;
+  final Widget Function(BuildContext context, DataState<T> state) ? stateBuilder;
+  final Widget Function(BuildContext context, Widget child)? frameBuilder;
   final StreamState<DataState<T>> stream;
+  final DataState<T> ? initialData ;
   final Function()? onReload;
 
   StreamDataStateWidget({
     super.key,
     required this.builder,
-    this.preLoadingBuilder,
-    this.errorBuilder,
+    this.frameBuilder,
     required this.stream,
+    this.stateBuilder,
+    this.initialData,
     this.onReload,
   });
 
@@ -24,42 +25,22 @@ class StreamDataStateWidget<T> extends MaterialStatelessWidget {
   Widget build(BuildContext context) {
     return StreamBuilder<DataState<T>>(
         stream: stream.stream,
+        initialData:initialData ,
         builder: (context, snapshot) {
-          if (snapshot.connectionState != ConnectionState.active) {
-            return const SizedBox.shrink();
-          }
-          if (snapshot.data is DataState) {
-            return handleDataState(snapshot.data as DataState, context);
-          }
-          if (snapshot.error != null) {
-            return handleApiErrorPlaceHolder(context , snapshot.error,
-                onClickReload: onReload);
-          }
-          return const LoadingView(
-            height: 150,
-          );
+          return  frameBuilder!=null ? frameBuilder!(context , _build(context,snapshot)) : _build(context,snapshot);
         });
   }
 
   Widget handleDataState(DataState state, BuildContext context) {
     if (state is DataLoading) {
-      return preLoadingBuilder == null
-          ? const LoadingView()
-          : preLoadingBuilder!(context, const LoadingView());
+      return const LoadingView();
     }
     if (state is DataSuccess<T>) {
-      return builder(context, state.data!);
+      return builder(context, state.data);
     }
     if (state is DataFailed) {
-      return preLoadingBuilder == null && errorBuilder == null
-          ? handleApiErrorPlaceHolder(context , state.error, onClickReload: onReload)
-          : errorBuilder != null
-              ? errorBuilder!(
-                  context, handleApiErrorPlaceHolder(context , state.error), state.error)
-              : preLoadingBuilder!(
-                  context,
-                  handleApiErrorPlaceHolder(context , state.error,
-                      onClickReload: onReload));
+      return handleApiErrorPlaceHolder(context , state.error, onClickReload: onReload);
+
     }
     return const Center();
   }
@@ -74,4 +55,20 @@ class StreamDataStateWidget<T> extends MaterialStatelessWidget {
       error: errorModel,
     );
   }
+
+  Widget _build(BuildContext context, AsyncSnapshot<DataState<T>> snapshot) {
+    if (snapshot.connectionState != ConnectionState.active) {
+      return const SizedBox.shrink();
+    }
+    if (snapshot.data is DataState) {
+      return stateBuilder !=null ? stateBuilder!(context,snapshot.data as DataState<T>):
+       handleDataState(snapshot.data as DataState, context);
+    }
+    if (snapshot.error != null) {
+      return handleApiErrorPlaceHolder(context,snapshot.error,
+          onClickReload: onReload);
+    }
+    return const SizedBox.shrink();
+  }
 }
+
