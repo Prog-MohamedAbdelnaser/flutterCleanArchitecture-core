@@ -1,9 +1,11 @@
 
+import 'package:rxdart/rxdart.dart';
+
 abstract class DataState<T> {
 
 }
 
-class UnInitState extends DataState {}
+class UnInitState<T> extends DataState<T> {}
 
 /**
  * this state for observe state with bloc listeners
@@ -45,4 +47,90 @@ class DataSuccess<T> extends DataStateFBuilder<T> {
    DataSuccess( this. data);
 }
 
-class DataLoading extends DataStateFBuilder {}
+class DataLoading<T> extends DataStateFBuilder<T> {}
+
+
+abstract class StreamDataState<T> {
+
+  final _streamController = BehaviorSubject<DataState<T>>();
+  Stream<DataState<T>> get stream => _streamController.stream;
+
+  start(){
+    _streamController.add(DataLoading());
+
+  }
+  setError(dynamic initError) {
+    _streamController.addError(DataFailed(initError));
+  }
+
+  setData(T initData) {
+    _streamController.add(DataSuccess(initData));
+  }
+
+  clearData(){
+    _streamController.add(UnInitState());
+  }
+
+  setFutureData(Future<T> Function() invoke,{Function(dynamic e)? onError}) async {
+    try {
+      T response = await invoke();
+      setData(response);
+    } catch (e) {
+      setError(e);
+      if(onError!=null)onError(e);
+    }
+  }
+
+  close() {
+    _streamController.sink.close();
+  }
+}
+
+class StreamDataStateInitial<T> extends StreamDataState<T> {
+
+}
+
+
+abstract class StreamState<T> {
+  dynamic error;
+  bool get hasError;
+  bool get hasData;
+  T? data;
+
+  final _streamController = BehaviorSubject<T>();
+  Stream<T> get stream => _streamController.stream;
+
+  setError(dynamic initError) {
+    error = initError;
+    _streamController.addError(initError);
+    data = null;
+  }
+
+  setData(T initData) {
+    data = initData;
+    _streamController.add(initData);
+    error = null;
+  }
+
+  setFutureData(Future<T> Function() invoke,{Function(dynamic e)? onError}) async {
+    try {
+      T response = await invoke();
+      setData(response);
+    } catch (e) {
+      setError(e);
+      if(onError!=null)onError(e);
+    }
+  }
+
+  close() {
+    _streamController.sink.close();
+  }
+}
+
+class StreamStateInitial<T> extends StreamState<T> {
+  @override
+  bool get hasData => data != null;
+
+  @override
+  bool get hasError => error != null;
+}
