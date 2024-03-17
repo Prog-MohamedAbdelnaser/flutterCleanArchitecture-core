@@ -63,6 +63,9 @@ abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
   @override
   Widget build(BuildContext context) {
     this.context = context;
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      onBuild(context);
+    });
     return safeArea() ? SafeArea(
       child: scaffoldBody()
     ):scaffoldBody();
@@ -145,9 +148,7 @@ abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
         builder: (context, state) => handleUiState(state, context),
         listener: (context, state) => buildListener(context, state));
     loadInitialData(context);
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      onBuild(context);
-    });
+
     return consumer;
   }
 
