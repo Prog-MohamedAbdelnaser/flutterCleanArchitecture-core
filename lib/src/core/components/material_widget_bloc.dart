@@ -58,6 +58,9 @@ abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
   String? title(BuildContext context) {
     return null;
   }
+  TextStyle titleStyle(){
+    return  context.textTheme.titleLarge!;
+  }
 
 
   @override
@@ -74,14 +77,18 @@ abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
   Widget scaffoldBody(){
     return Scaffold(
       backgroundColor: backgroundColor(),
-      appBar: title(context)==null ?null:  appBar(context),
-      body: buildConsumer(context),
+      appBar: title(context)==null ?null:  mAppBar(context),
+      body: bodyWidget(context),
     );
+  }
+  Widget bodyWidget(BuildContext context){
+    return buildConsumer(context);
   }
   bool safeArea(){
     return true ;
   }
-
+  
+  @protected
   Color backgroundColor() {
     return Colors.transparent;
   }
@@ -163,12 +170,13 @@ abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
     return DialogsManager();
   }
 
-  AppBar  ? appBar(BuildContext context) {
+  AppBar  ? mAppBar(BuildContext context) {
     return AppBar(
       title: Text(
         title(context) ?? '',
-        style: context.textTheme.titleLarge,
+        style: titleStyle()??context.textTheme.titleLarge,
       ),
+      elevation: 0,
       centerTitle: centerTitle(),
       automaticallyImplyLeading: false,
       leading: hasBack(context)

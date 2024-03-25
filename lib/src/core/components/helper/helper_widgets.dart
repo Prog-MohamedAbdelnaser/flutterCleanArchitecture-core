@@ -25,8 +25,10 @@ Future showAppModalBottomSheet(
       isScrollControlled: isScrollControlled == true,
       isDismissible: true,
       enableDrag: true,
+      
       constraints: isScrollControlled == true ? null : const BoxConstraints(maxHeight: 500),
       backgroundColor: Colors.transparent,
+      
       builder: (BuildContext builder) {
         return SlideAnimationWidget(
           child: Container(
