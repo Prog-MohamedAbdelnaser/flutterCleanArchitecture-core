@@ -70,18 +70,18 @@ abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
       onBuild(context);
     });
     return safeArea() ? SafeArea(
-      child: scaffoldBody()
-    ):scaffoldBody();
+      child: buildScaffold()
+    ):buildScaffold();
   }
 
-  Widget scaffoldBody(){
+  Widget buildScaffold(){
     return Scaffold(
       backgroundColor: backgroundColor(),
       appBar: title(context)==null ?null:  mAppBar(context),
-      body: bodyWidget(context),
+      body: scaffoldBody(context),
     );
   }
-  Widget bodyWidget(BuildContext context){
+  Widget scaffoldBody(BuildContext context){
     return buildConsumer(context);
   }
   bool safeArea(){
