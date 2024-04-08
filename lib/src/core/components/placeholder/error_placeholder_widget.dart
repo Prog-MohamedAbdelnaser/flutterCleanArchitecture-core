@@ -46,7 +46,7 @@ class ErrorPlaceHolderWidget extends MaterialStatelessWidget {
                 height: 16,
               ),
               messageWidget(),
-              buttonWidget(context)
+              _buildButtonWidget(context)
             ],
           ),
         ));
@@ -93,22 +93,25 @@ class ErrorPlaceHolderWidget extends MaterialStatelessWidget {
         : const SizedBox.shrink();
   }
 
-  Widget buttonWidget(BuildContext context) {
+  Widget _buildButtonWidget(BuildContext context) {
     return onRetryButton != null || error.defaultAction==true
-        ? AppCupertinoButton(
-            text: error.buttonName,
-            margin: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
-            onPressed: () {
-              retryButtonAction(context);
-            },
-          )
+        ? buttonWidget(context)
         : const SizedBox.shrink();
   }
 
+  Widget buttonWidget(BuildContext context){
+    return AppCupertinoButton(
+      text: error.buttonName,
+      margin: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+      onPressed: () {
+        retryButtonAction(context);
+      },
+    );
+  }
   Widget messageWidget() {
     return  Text(
        error.message??'',
-      style: textTheme.displayLarge,
+      style: textTheme.bodyMedium,
       textAlign: TextAlign.center,
     );
   }

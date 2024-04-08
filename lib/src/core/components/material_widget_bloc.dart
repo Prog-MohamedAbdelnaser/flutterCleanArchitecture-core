@@ -138,7 +138,9 @@ abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
     dialogsManager(context).showMessageDialog(context, errorModel.message);
   }
 
-  onClickReload() {}
+  void onClickReload() {
+    loadInitialData(context);
+  }
 
   void onRequestSuccess(BuildContext context , successData) {}
 
