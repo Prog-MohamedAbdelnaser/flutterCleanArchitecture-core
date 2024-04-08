@@ -55,6 +55,9 @@ abstract class StreamDataState<T> {
   final _streamController = BehaviorSubject<DataState<T>>();
   Stream<DataState<T>> get stream => _streamController.stream;
 
+  bool isSame<S>(S s){
+    return T is S;
+  }
   start(){
     _streamController.add(DataLoading());
 

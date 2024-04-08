@@ -10,6 +10,7 @@ abstract class BaseCubit extends Cubit<DataState>{
   BaseCubit() : super(UnInitState());
 
   Map<String, dynamic> cashingModels = {};
+  Map<String, StreamDataStateInitial> observers = {};
 
   T? getFromCash<T>() {
     final key = T.hashCode.toString();
@@ -27,7 +28,6 @@ abstract class BaseCubit extends Cubit<DataState>{
       final value =await  executeCalling(invoke,enableCache: enableCache);
       onSuccess(value);
     } catch (e) {
-      print('OnError ${e}');
       emit(DataFailed(e));
     }
   }
@@ -41,8 +41,6 @@ abstract class BaseCubit extends Cubit<DataState>{
     final response = await invoke();
     if (response != null && enableCache == true) {
       cashingModels[key] = response;
-      print('cashingModels $key => ${response}');
-
     }
     return (response);
   }
@@ -72,7 +70,29 @@ abstract class BaseCubit extends Cubit<DataState>{
       );
     });
   }
+  StreamDataStateInitial<T> executeEmitterObserver<T>(Future<T> Function() invoke, {bool enableCache = false,required String tag})  {
+    if(observers.containsKey(tag) && observers[tag]?.isSame(T)==false){
+      return throw 'this tag defined before with another data type';
+    }
+    final observer = (observers[tag]!=null)?observers[tag] as StreamDataStateInitial<T>:StreamDataStateInitial<T>();
+    if(!observers.containsKey(tag))observers[tag]=observer;
+    observer.start();
+    observer.setFutureData(() =>  executeCalling(invoke, enableCache: enableCache,tag: tag));
+    return observer;
+  }
+  StreamDataStateInitial<T> findObserver<T>(String observerTag){
+    final observer = observers[observerTag]??StreamDataStateInitial<T>();
+    if(!observers.containsKey(observerTag))observers[observerTag]=observer;
+    return observer as StreamDataStateInitial<T>;
+  }
 
+  T ? findLastResponse<T>({String ?tag}){
+    final key = (tag??'')+T.hashCode.toString();
+    if (cashingModels.containsKey(key)) {
+      return (cashingModels[key]);
+    }
+    return null ;
+  }
 
   void emitErrorIfTypeIsGlobal(e){
     if (e is DioException) {

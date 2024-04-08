@@ -7,7 +7,7 @@ class StreamDataStateWidget<T> extends MaterialStatelessWidget {
   final Widget Function(BuildContext context, T data) builder;
   final Widget Function(BuildContext context, DataState<T> state) ? stateBuilder;
   final Widget Function(BuildContext context, Widget child)? frameBuilder;
-  final StreamState<DataState<T>> stream;
+  final StreamDataState<T> stream;
   final DataState<T> ? initialData ;
   final Function()? onReload;
 
