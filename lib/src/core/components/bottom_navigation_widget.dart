@@ -10,6 +10,8 @@ class BottomNavigationWidget extends StatefulWidget {
   final double? barElevation;
   final EdgeInsetsGeometry? itemsPadding;
   final bool   useSafeArea ;
+  final bool   showSelectedLabels ;
+  final bool   showUnSelectedLabels ;
 
   final Widget Function(BuildContext context, Widget bar)? builder;
 
@@ -22,7 +24,7 @@ class BottomNavigationWidget extends StatefulWidget {
       this.barColor,
       this.builder,
         this.useSafeArea =true,
-      this.barElevation})
+      this.barElevation,this.showSelectedLabels=true,this.showUnSelectedLabels=true })
       : super(key: key);
 
   @override
@@ -64,8 +66,8 @@ class BottomNavigationState extends State<BottomNavigationWidget> {
       backgroundColor: widget.barColor ?? Colors.white,
       elevation: widget.barElevation,
       unselectedItemColor: context.theme.unselectedWidgetColor,
-      showSelectedLabels: true,
-      showUnselectedLabels: true,
+      showSelectedLabels: widget.showSelectedLabels,
+      showUnselectedLabels: widget.showUnSelectedLabels,
       selectedIconTheme: context.theme.iconTheme,
       selectedLabelStyle: context.textTheme.bodyMedium!
           .copyWith(color: context.theme.primaryColor),
