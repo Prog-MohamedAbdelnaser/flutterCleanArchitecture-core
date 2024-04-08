@@ -118,7 +118,7 @@ class BottomNavigationItemBuilder extends BottomNavigationBarItem {
               padding: itemsPadding ?? const EdgeInsets.all(8),
               child: _buildItem(model, selected == true, context),
             ),
-            label: model.label);
+            label: model.label??'');
 
   static Widget _buildItem(
       BottomNavigationWidgetModel model, bool selected, BuildContext context) {
