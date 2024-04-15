@@ -79,6 +79,7 @@ abstract class StreamDataState<T> {
       T response = await invoke();
       setData(response);
     } catch (e) {
+      print('setFutureData error ${e}');
       setError(e);
       if(onError!=null)onError(e);
     }

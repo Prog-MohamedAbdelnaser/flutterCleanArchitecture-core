@@ -104,6 +104,7 @@ abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
   }
 
   Widget handleUiState(DataState state, BuildContext context) {
+    print('handleUiState $state => ${state is T}');
     if (state is DataLoading) {
       return LoadingView();
     }

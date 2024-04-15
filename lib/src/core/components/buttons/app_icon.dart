@@ -13,7 +13,7 @@ class AppIcon extends StatelessWidget {
       icon,
       height: size ?? 25,
       width: size ?? 25,
-      color: color ?? Theme.of(context).primaryColor,
+      color: color
     );
   }
 }
