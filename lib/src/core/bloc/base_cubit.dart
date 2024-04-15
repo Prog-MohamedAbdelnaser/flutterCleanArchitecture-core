@@ -74,8 +74,7 @@ abstract class BaseCubit extends Cubit<DataState>{
     if(observers.containsKey(tag) && observers[tag]?.isSame(T)==false){
       return throw 'this tag defined before with another data type';
     }
-    final observer = (observers[tag]!=null)?observers[tag] as StreamDataStateInitial<T>:StreamDataStateInitial<T>();
-    if(!observers.containsKey(tag))observers[tag]=observer;
+    final observer = findObserver<T>(tag);
     observer.start();
     observer.setFutureData(() =>  executeCalling(invoke, enableCache: enableCache,tag: tag));
     return observer;

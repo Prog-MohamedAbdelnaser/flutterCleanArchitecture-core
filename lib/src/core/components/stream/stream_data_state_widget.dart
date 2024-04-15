@@ -4,21 +4,22 @@ import '../../bloc/data_state.dart';
 
 
 class StreamDataStateWidget<T> extends MaterialStatelessWidget {
-  final Widget Function(BuildContext context, T data) builder;
+  final Widget Function(BuildContext context, T data) ?builder;
   final Widget Function(BuildContext context, DataState<T> state) ? stateBuilder;
   final Widget Function(BuildContext context, Widget child)? frameBuilder;
   final StreamDataState<T> stream;
   final DataState<T> ? initialData ;
   final Function()? onReload;
-
+  final double ? placeHolderHeight ;
   StreamDataStateWidget({
     super.key,
-    required this.builder,
+     this.builder,
     this.frameBuilder,
     required this.stream,
     this.stateBuilder,
     this.initialData,
     this.onReload,
+    this.placeHolderHeight,
   });
 
   @override
@@ -27,17 +28,20 @@ class StreamDataStateWidget<T> extends MaterialStatelessWidget {
         stream: stream.stream,
         initialData:initialData ,
         builder: (context, snapshot) {
+          print('stateBuilderstateBuilder ${snapshot.data}');
           return  frameBuilder!=null ? frameBuilder!(context , _build(context,snapshot)) : _build(context,snapshot);
         });
   }
 
   Widget handleDataState(DataState state, BuildContext context) {
-    if (state is DataLoading) {
-      return const LoadingView();
-    }
+
     if (state is DataSuccess<T>) {
-      return builder(context, state.data);
+      return builder!=null ?builder!(context, state.data):const SizedBox.shrink();
     }
+    if (state is DataLoading) {
+      return  LoadingView(height: placeHolderHeight,);
+    }
+
     if (state is DataFailed) {
       return handleApiErrorPlaceHolder(context , state.error, onClickReload: onReload);
 
@@ -51,7 +55,7 @@ class StreamDataStateWidget<T> extends MaterialStatelessWidget {
     return ErrorPlaceHolderWidget(
       color: Colors.transparent,
       onRetryButton: onReload,
-      height: 250,
+      height: placeHolderHeight??250,
       error: errorModel,
     );
   }

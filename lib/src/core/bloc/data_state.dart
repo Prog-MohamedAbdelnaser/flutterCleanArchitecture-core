@@ -63,7 +63,7 @@ abstract class StreamDataState<T> {
 
   }
   setError(dynamic initError) {
-    _streamController.addError(DataFailed(initError));
+    _streamController.add(DataFailed(initError));
   }
 
   setData(T initData) {
