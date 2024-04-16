@@ -2,12 +2,13 @@ import 'package:get/get.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../../main_index.dart';
+import '../dialogs/progress_dialog.dart';
 
 abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
     extends MaterialStatelessWidget {
   late BuildContext context;
   late B bloc = getBloc();
-
+  late final CustomProgressDialog _progress = dialogsManager(context).createProgress(Get.context!);
   B getBloc() {
     if (initBloc(context) != null) {
       return initBloc(context)!;
@@ -44,11 +45,11 @@ abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
   }
 
   showProgress() {
-    progress.show();
+    _progress.show();
   }
 
   dismissProgress() {
-    progress.dismiss();
+    _progress.dismiss();
   }
 
   @protected

@@ -10,11 +10,6 @@ abstract class MaterialStatelessWidget extends StatelessWidget {
   final local = Get.locale?.languageCode ?? 'en';
   final textTheme = Get.context!.textTheme;
 
-  //static String routeName (){return '';}
-  
-  final CustomProgressDialog progress =
-      DialogsManager.createProgress(Get.context!);
-
   bool isRtl() => local == 'ar';
 
   MaterialStatelessWidget({Key? key}):  super(key: key);

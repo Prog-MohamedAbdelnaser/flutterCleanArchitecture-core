@@ -1,14 +1,16 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 
 class ProgressDialog {
   static CustomProgressDialog createProgress(BuildContext context) {
     return CustomProgressDialog(context,
         dismissable: false,
-        loadingWidget: const CircularProgressIndicator(
+        loadingWidget:  CircularProgressIndicator(
           strokeWidth: 2,
+          color: context.theme.primaryColor,
         ),
         onDismiss: () {},
         transitionDuration: const Duration(milliseconds: 500),

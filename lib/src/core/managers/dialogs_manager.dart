@@ -5,7 +5,7 @@ import '../../../main_index.dart';
 import '/src/core/dialogs/progress_dialog.dart';
 export 'dialogs_manager.dart';
  class DialogsManager {
-  static CustomProgressDialog createProgress(BuildContext context) {
+   CustomProgressDialog createProgress(BuildContext context) {
     return ProgressDialog.createProgress(context,);
   }
    showSuccessfullyAnimDialog(BuildContext context, {required Function() onDismiss, String? message}){
