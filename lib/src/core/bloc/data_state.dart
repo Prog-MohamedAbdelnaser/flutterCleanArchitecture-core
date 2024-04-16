@@ -5,7 +5,7 @@ abstract class DataState<T> {
 
 }
 
-class UnInitState<T> extends DataState<T> {}
+class UnInitState<T> extends DataStateFBuilder<T> {}
 
 /**
  * this state for observe state with bloc listeners
