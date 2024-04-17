@@ -6,8 +6,7 @@ class SelectableListWidget extends StatefulWidget {
   final Function(int index) onSelect;
   final int count;
   final int? initIndex;
-
-
+  final SliverGridDelegate ? sliverGridDelegate;
   final List<int>? notAllowedIndexes;
   final double? aspectRatio;
   final ScrollController? scrollController;
@@ -28,6 +27,7 @@ class SelectableListWidget extends StatefulWidget {
       this.initIndex,
       this.grid = false,
       required this.itemBuilder,
+        this.sliverGridDelegate,
       this.notAllowedItemBuilder,
       this.isVertical = false,
       this.notAllowedIndexes});
@@ -105,7 +105,7 @@ class _SelectableListWidget extends State<SelectableListWidget> {
         padding: EdgeInsets.zero,
         shrinkWrap: true,
         scrollDirection: Axis.vertical,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        gridDelegate: widget.sliverGridDelegate??SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           crossAxisSpacing: crossAxisSpacing,
           mainAxisSpacing: mainAxisSpacing,
