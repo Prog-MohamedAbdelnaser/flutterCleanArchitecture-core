@@ -71,11 +71,11 @@ abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
       onBuild(context);
     });
     return safeArea() ? SafeArea(
-      child: buildScaffold()
-    ):buildScaffold();
+      child: buildScaffold(context)
+    ):buildScaffold(context);
   }
 
-  Widget buildScaffold(){
+  Widget buildScaffold(BuildContext context){
     return Scaffold(
       backgroundColor: backgroundColor(),
       appBar: title(context)==null ?null:  mAppBar(context),
@@ -158,8 +158,9 @@ abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
         },
         builder: (context, state) => handleUiState(state, context),
         listener: (context, state) => buildListener(context, state));
-    loadInitialData(context);
-
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      loadInitialData(context);
+    });
     return consumer;
   }
 

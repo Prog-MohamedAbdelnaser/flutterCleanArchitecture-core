@@ -5,13 +5,14 @@ class MultiSelectableListWidget extends StatefulWidget {
   final int count;
   final int maxSelectable;
   final List<int>? initIndexes;
+  final List<int>? disabledIndexes;
   final double? aspectRatio;
   final ScrollController? scrollController;
   final bool isVertical;
   final bool grid;
   final EdgeInsetsGeometry? padding;
 
-  final Widget Function(int index, bool isSelected) itemBuilder;
+  final Widget Function(int index, bool isSelected, bool disabled) itemBuilder;
 
   const MultiSelectableListWidget(
       {super.key,
@@ -23,7 +24,7 @@ class MultiSelectableListWidget extends StatefulWidget {
       this.maxSelectable = 1,
       this.initIndexes,
       this.grid = false,
-      required this.itemBuilder,
+      required this.itemBuilder,this.disabledIndexes,
       this.isVertical = false});
 
   @override
@@ -87,16 +88,18 @@ class _MultiSelectableListWidget extends State<MultiSelectableListWidget> {
         scrollDirection: widget.isVertical ? Axis.vertical : Axis.horizontal,
         itemBuilder: (c, i) {
           final isSelected = selectedIndexes.contains(i);
+
+          final disabled = widget.disabledIndexes!=null ? widget.disabledIndexes!.contains(i):false;
           return Padding(
             padding: widget.padding != null
                 ? widget.padding!
                 : const EdgeInsetsDirectional.only(end: 16),
             child: InkWell(
               borderRadius: BorderRadius.circular(16),
-              onTap: () {
+              onTap: disabled ==false? () {
                 onSelect(i);
-              },
-              child: widget.itemBuilder(i, isSelected),
+              }:null,
+              child: widget.itemBuilder(i, isSelected,disabled),
             ),
           );
         });
@@ -120,14 +123,16 @@ class _MultiSelectableListWidget extends State<MultiSelectableListWidget> {
           itemCount: widget.count,
           itemBuilder: (c, i) {
             final isSelected = selectedIndexes.contains(i);
+            final disabled = widget.disabledIndexes!=null ? widget.disabledIndexes!.contains(i):false;
+
             return Padding(
               padding: const EdgeInsets.all(0.0),
               child: InkWell(
-                  onTap: () {
+                  onTap:disabled ==false ? () {
                     onSelect(i);
-                  },
+                  }:null ,
                   borderRadius: BorderRadius.circular(16),
-                  child: widget.itemBuilder(i, isSelected)),
+                  child: widget.itemBuilder(i, isSelected,disabled)),
             );
           }),
     );
