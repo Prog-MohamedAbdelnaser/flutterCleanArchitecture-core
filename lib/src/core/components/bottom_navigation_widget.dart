@@ -115,7 +115,7 @@ class BottomNavigationItemBuilder extends BottomNavigationBarItem {
       [bool? selected, EdgeInsetsGeometry? itemsPadding])
       : super(
             icon: Padding(
-              padding: itemsPadding ?? const EdgeInsets.all(8),
+              padding: itemsPadding ?? const EdgeInsets.all(0),
               child: _buildItem(model, selected == true, context),
             ),
             label: model.label??'');
