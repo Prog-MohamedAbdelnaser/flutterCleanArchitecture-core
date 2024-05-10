@@ -13,6 +13,9 @@ class BottomNavigationWidget extends StatefulWidget {
   final bool   showSelectedLabels ;
   final bool   showUnSelectedLabels ;
 
+  final TextStyle?   selectedLabelStyle ;
+  final TextStyle ?  unSelectedLabelsStyle ;
+
   final Widget Function(BuildContext context, Widget bar)? builder;
 
   const BottomNavigationWidget(
@@ -24,7 +27,7 @@ class BottomNavigationWidget extends StatefulWidget {
       this.barColor,
       this.builder,
         this.useSafeArea =true,
-      this.barElevation,this.showSelectedLabels=true,this.showUnSelectedLabels=true })
+      this.barElevation,this.showSelectedLabels=true,this.showUnSelectedLabels=true,this.selectedLabelStyle,this.unSelectedLabelsStyle })
       : super(key: key);
 
   @override
@@ -69,9 +72,9 @@ class BottomNavigationState extends State<BottomNavigationWidget> {
       showSelectedLabels: widget.showSelectedLabels,
       showUnselectedLabels: widget.showUnSelectedLabels,
       selectedIconTheme: context.theme.iconTheme,
-      selectedLabelStyle: context.textTheme.bodyMedium!
+      selectedLabelStyle: widget.selectedLabelStyle??context.textTheme.bodyMedium!
           .copyWith(color: context.theme.primaryColor),
-      unselectedLabelStyle: context.textTheme.labelMedium
+      unselectedLabelStyle:widget.unSelectedLabelsStyle?? context.textTheme.labelMedium
           ?.copyWith(color: context.theme.unselectedWidgetColor),
       items: widget.items
           .map((e) => e.builder(_selectedIndex == widget.items.indexOf(e),
