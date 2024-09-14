@@ -38,12 +38,11 @@ class StreamStateWidget<T> extends MaterialStatelessWidget {
 
   Widget handleApiErrorPlaceHolder(BuildContext context, error,
       {Function()? onClickReload}) {
-    final errorModel = errorManager(context).prepareError(error);
-    return ErrorPlaceHolderWidget(
-      color: Colors.transparent,
-      onRetryButton: onReload,
+    final errorModel = errorManager.prepareError(error);
+    return errorWidgetFactory.createErrorWidget(
+      errorModel,
+      onRetry: onReload,
       height: 250,
-      error: errorModel,
     );
   }
 }

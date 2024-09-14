@@ -1,15 +1,16 @@
 import 'package:get/get.dart';
+import 'package:softcore/src/core/components/placeholder/soft_error_widget.dart';
 
 import '../../../main_index.dart';
+import '../../di/error_widget_factory_registry.dart';
+import '../dialogs/dialogs_manager.dart';
 import '../dialogs/progress_dialog.dart';
 import 'package:get_it/get_it.dart';
 
+import 'base/softcore_bloc_statelesswidget.dart';
+
 abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
-    extends MaterialStatelessWidget {
-
-
-  B get bloc => GetIt.instance.get<B>();
-
+    extends SoftCoreBlocStateless<T,B,DataState> {
 
   const MaterialBlocWidget({Key? key}) : super(key: key);
 
@@ -25,8 +26,8 @@ abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
     progress.dismiss();
   }
 
-  CustomProgressDialog get progress => dialogsManager(gContext!).createProgress(gContext!);
-  
+  SoftcoreProgressDialog get progress => dialogsManager.createProgress(gContext!);
+
   @protected
   void loadInitialData(BuildContext context) {}
 
@@ -57,7 +58,10 @@ abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
     );
   }
   Widget scaffoldBody(BuildContext context){
-    return buildConsumer(context);
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      loadInitialData(context);
+    });
+    return super.build(context);
   }
   bool safeArea(){
     return true ;
@@ -105,14 +109,14 @@ abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
     );
   }
 
-  ErrorPlaceHolderWidget errorWidget(
+  Widget errorWidget(
       {exception, Function()? onClickReload}){
-    return ErrorPlaceHolderWidget(error: errorManager(gContext!).prepareError(exception),onRetryButton: onClickReload,);
+    return errorWidgetFactory.createErrorWidget(errorManager.prepareError(exception),onRetry: onClickReload,);
   }
 
   void handleApiErrorDialog(error, BuildContext context) {
-    final errorModel = errorManager(context).prepareError(error);
-    dialogsManager(context).showMessageDialog(context, errorModel.message);
+    final errorModel = errorManager.prepareError(error);
+    dialogsManager.showMessageDialog(context, errorModel.message);
   }
 
   void onClickReload(BuildContext context) {
@@ -121,33 +125,21 @@ abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
 
   void onRequestSuccess(BuildContext context , successData) {}
 
-  BlocConsumer buildConsumer(BuildContext context) {
-    final consumer = BlocConsumer<B, DataState>(
-        bloc: bloc,
-        listenWhen: (state, current) {
-          return current is DataStateFListener;
-        },
-        buildWhen: (state, current) {
-          return current is DataStateFBuilder;
-        },
-        builder: (context, state) => buildStateWidget(context,state),
-        listener: (context, state) => handleStateChange(context, state));
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      loadInitialData(context);
-    });
-    return consumer;
+  @override
+  bool listenWhen(DataState previous, DataState current) {
+    return current is DataStateFListener;
   }
-
+  @override
+  bool buildWhen(DataState previous, DataState current) {
+    return current is DataStateFBuilder;
+  }
   void onBuild(BuildContext context) {}
 
   handleErrorDialogBuilder(dynamic exception) {
     final context = Get.context!;
-    dialogsManager(context).showMessageDialog(context, exception);
+    dialogsManager.showMessageDialog(context, exception);
   }
 
-  DialogsManager dialogsManager(BuildContext context){
-    return DialogsManager();
-  }
 
   AppBar  ? mAppBar(BuildContext context) {
     return AppBar(
@@ -167,13 +159,12 @@ abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
     );
   }
 
-  /// Method to handle different state changes
-  void handleStateChange(BuildContext context, DataState state){
-    return _buildListener(context, state);
+@override
+  void handleStateChange(BuildContext context, DataState state) {
+    _buildListener(context, state);
   }
-
-  /// Method to build the widget based on the current state
-  Widget buildStateWidget(BuildContext context, DataState state){
+  @override
+  Widget buildStateWidget(BuildContext context, DataState state) {
     return _handleUiState(state, context);
   }
 

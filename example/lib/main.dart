@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 import 'package:softcore/softMaterials.dart';
 import 'package:support/config/Themes/themes.dart';
+
+import 'injector.dart';
 
 Future<void> main() async {
   SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+  
+  // Optionally configure the DefaultErrorWidgetFactory if needed
+  // For instance, you can set up default configurations for error widgets
+  // DefaultErrorWidgetFactory.configureDefaults(...);
 
   runApp(const RestartWidget(child: MyApp()));
 }
@@ -22,37 +27,25 @@ class MyApp extends StatelessWidget {
       statusBarIconBrightness: Brightness.dark,
     ));
 
-    return GetMaterialApp(
+    return SoftCoreApp(
       title: 'Flutter Demo',
       theme: kAppTheme,
-      debugShowCheckedModeBanner: false,
+      onInit: (){
+
+      },
+      errorWidgetFactory: DefaultErrorWidgetFactory(),
+      errorHandler: DefaultErrorHandler.instance,
+      dialogsManager: DefaultDialogsManager(),
       home: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(
           color: Colors.white,
-          child: Container(
-            child: Material(child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: MaterialTextField(),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: MaterialTextField(),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: MaterialTextField(),
-                ),
-
-              ],
-            )),
+          child: const Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.center,
           ),
         ),
-      ),
+      ), dependencyInjector: MyCustomDependencyInjector(),
     );
   }
 }

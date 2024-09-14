@@ -8,10 +8,15 @@ import '../../../main_index.dart';
 import '../exceptions/api_exception.dart';
 import '../exceptions/app_base_exception.dart';
 import 'app_error.dart';
+import 'error_handler.dart';
 
-class ErrorHandlerManager {
-  final BuildContext context;
-  ErrorHandlerManager(this.context);
+class DefaultErrorHandler extends ErrorHandler{
+
+  DefaultErrorHandler._internal(); // Private constructor for singleton
+
+  static final DefaultErrorHandler _instance = DefaultErrorHandler._internal();
+
+  static DefaultErrorHandler get instance => _instance;
 
   AppError prepareError(dynamic exception) {
     var title = '';
@@ -32,7 +37,7 @@ class ErrorHandlerManager {
               message: exception.toString(),
               errorType: ErrorType.Unknown);
         }
-      case String:
+      case const (String):
         {
           return AppError(
               title: title,
@@ -52,7 +57,7 @@ class ErrorHandlerManager {
   AppError appErrorFromAppBaseException(AppBaseException exception) {
     return AppError(
         errorType: exception.errorType,
-        message: exception.toLocalize(context.getLanguageCode()));
+        message: exception.toLocalize(getLanguageCode()));
 
   }
 
@@ -95,6 +100,11 @@ class ErrorHandlerManager {
   }
 
   String undefineError() {
-    return 'undefineError';
+    return 'undefine Error';
+  }
+
+  @override
+  String getLanguageCode() {
+    return 'en';
   }
 }

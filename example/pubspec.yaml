@@ -51,4 +51,4 @@ dev_dependencies:
     #git:
     #  url: https://github.com/Prog-MohamedAbdelnaser/flutterCleanArchitecture-core.git
     #  ref: development # branch name
-    path : ../../softcore
+    path : ../../flutterCleanArchitecture-core

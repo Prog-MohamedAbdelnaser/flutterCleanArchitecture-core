@@ -5,8 +5,8 @@ import 'package:get/get.dart';
 
 
 class ProgressDialog {
-  static CustomProgressDialog createProgress(BuildContext context) {
-    return CustomProgressDialog(context,
+  static SoftcoreProgressDialog createProgress(BuildContext context) {
+    return SoftcoreProgressDialogImp(context,
         dismissable: false,
         loadingWidget:  CircularProgressIndicator(
           strokeWidth: 2,
@@ -362,7 +362,7 @@ abstract class _ProgressDialog {
   void setMessage(Widget message);
 }
 
-abstract class _CustomProgressDialog {
+abstract class SoftcoreProgressDialog {
   ///You can set loading widget of dialog using this function,
   ///even the dialog already pop up.
   ///Set it Null to change it as default loadingWidget that already you set before
@@ -372,12 +372,20 @@ abstract class _CustomProgressDialog {
   ///even the dialog already pop up.
   ///Set it Null to change it as default
   void setBackgroundColor(Color color);
+
+
+  ///Show progress dialog
+  void show({bool useSafeArea = true}) ;
+
+  ///Dismiss the dialog
+  void dismiss() ;
+
 }
 
 ///Simple progress dialog with blur background and popup animations, use DialogStyle to custom it
 ///inspired by ProgressDialog from Android Native, and it very simple to use
 
-class CustomProgressDialog implements _CustomProgressDialog {
+class SoftcoreProgressDialogImp implements SoftcoreProgressDialog {
   ///The context
   final BuildContext context;
 
@@ -404,7 +412,7 @@ class CustomProgressDialog implements _CustomProgressDialog {
   bool _show = false;
   late _CustomProgressDialogWidget _progressDialogWidget;
 
-  CustomProgressDialog(
+  SoftcoreProgressDialogImp(
     this.context, {
     this.backgroundColor,
     this.blur,
@@ -429,6 +437,7 @@ class CustomProgressDialog implements _CustomProgressDialog {
   }
 
   ///Show progress dialog
+  @override
   void show({bool useSafeArea = true}) async {
     if (!_show) {
       _show = true;
@@ -445,6 +454,7 @@ class CustomProgressDialog implements _CustomProgressDialog {
   }
 
   ///Dismiss the dialog
+  @override
   void dismiss() {
     print(_show);
     if (_show) {
@@ -481,7 +491,7 @@ class CustomProgressDialog implements _CustomProgressDialog {
     Duration? transitionDuration,
     bool useSafeArea = true,
   }) async {
-    CustomProgressDialog pDialog = CustomProgressDialog(
+    SoftcoreProgressDialog pDialog = SoftcoreProgressDialogImp(
       context,
       loadingWidget: loadingWidget,
       dismissable: dismissable,
@@ -546,8 +556,7 @@ class _CustomProgressDialogWidget extends StatefulWidget {
 }
 
 class _CustomProgressDialogWidgetState
-    extends State<_CustomProgressDialogWidget>
-    implements _CustomProgressDialog {
+    extends State<_CustomProgressDialogWidget> {
   Widget? _loadingWidget;
   Color? _backgroundColor;
 
@@ -583,13 +592,11 @@ class _CustomProgressDialogWidgetState
     );
   }
 
-  @override
   void setLoadingWidget(Widget loadingWidget) async {
     this._loadingWidget = loadingWidget;
     if (mounted) setState(() {});
   }
 
-  @override
   void setBackgroundColor(Color color) async {
     this._backgroundColor = color;
     if (mounted) setState(() {});

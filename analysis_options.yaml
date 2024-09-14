@@ -1,4 +1,14 @@
-include: package:flutter_lints/flutter.yaml
 
-# Additional information about this file can be found at
-# https://dart.dev/guides/language/analysis-options
+analyzer:
+  errors:
+    # Ignore specific warnings or errors
+    override_on_non_overriding_member: false
+    unused_import: false
+    unused_element: false
+    must_be_immutable: ignore
+    deprecated_member_use: ignore
+    unnecessary_import: ignore
+    dead_null_aware_expression: ignore
+    unused_local_variable: ignore
+
+
