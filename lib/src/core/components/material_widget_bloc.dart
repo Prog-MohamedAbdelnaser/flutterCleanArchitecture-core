@@ -1,32 +1,48 @@
 import 'package:get/get.dart';
+import 'package:get_it/get_it.dart';
 
 import '../../../main_index.dart';
 import '../dialogs/progress_dialog.dart';
-import 'package:get_it/get_it.dart';
 
 abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
     extends MaterialStatelessWidget {
+   final B  bloc ;
+    CustomProgressDialog get _progress => dialogsManager(gContext!).createProgress(Get.context!);
 
 
-  B get bloc => GetIt.instance.get<B>();
-
-
-  const MaterialBlocWidget({Key? key}) : super(key: key);
+  MaterialBlocWidget({Key? key})
+      :bloc= GetIt.instance.get<B>()
+  ,  super(key: key);
 
   @protected
   Widget buildWidget(BuildContext context, T state);
 
+  void buildListener(BuildContext context, dynamic state) {
+    if (state is LoadingStateListener) {
+      showProgress();
+    } else {
+      dismissProgress();
+    }
+
+    if (state is FailureStateListener) {
+      dismissProgress();
+      handleApiErrorDialog(state.error, gContext!);
+    }
+
+    if (state is SuccessStateListener) {
+      dismissProgress();
+      onRequestSuccess(gContext! , state.data);
+    }
+  }
 
   showProgress() {
-    progress.show();
+    _progress.show();
   }
 
   dismissProgress() {
-    progress.dismiss();
+    _progress.dismiss();
   }
 
-  CustomProgressDialog get progress => dialogsManager(gContext!).createProgress(gContext!);
-  
   @protected
   void loadInitialData(BuildContext context) {}
 
@@ -35,7 +51,7 @@ abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
     return null;
   }
   TextStyle titleStyle(){
-    return  textTheme.titleLarge!;
+    return  gContext!.textTheme.titleLarge!;
   }
 
 
@@ -45,7 +61,7 @@ abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
       onBuild(context);
     });
     return safeArea() ? SafeArea(
-      child: buildScaffold(context)
+        child: buildScaffold(context)
     ):buildScaffold(context);
   }
 
@@ -62,7 +78,7 @@ abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
   bool safeArea(){
     return true ;
   }
-  
+
   @protected
   Color backgroundColor() {
     return Colors.transparent;
@@ -78,18 +94,17 @@ abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
     return Navigator.canPop(context);
   }
 
-  Widget _handleUiState(DataState state, BuildContext context) {
+  Widget handleUiState(DataState state, BuildContext context) {
+    print('handleUiState $state => ${state is T}');
     if (state is DataLoading) {
-      return const LoadingView();
+      return LoadingView();
     }
     if (state is T) {
       return buildWidget(context, state as T);
     }
     if (state is DataFailed) {
-      return buildApiErrorWidget(state.error,
-          onClickReload: (){
-            onClickReload(context);
-          });
+      return handleApiErrorPlaceHolder(state.error,
+          onClickReload: onClickReload);
     }
     return onBuildUnInitWidget(context);
   }
@@ -98,14 +113,14 @@ abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
     return const Center();
   }
 
-  Widget buildApiErrorWidget(exception, {Function()? onClickReload}) {
-    return errorWidget(
+  Widget handleApiErrorPlaceHolder(exception, {Function()? onClickReload}) {
+    return placeHolderWidget(
       exception: exception,
       onClickReload: onClickReload,
     );
   }
 
-  ErrorPlaceHolderWidget errorWidget(
+  ErrorPlaceHolderWidget placeHolderWidget(
       {exception, Function()? onClickReload}){
     return ErrorPlaceHolderWidget(error: errorManager(gContext!).prepareError(exception),onRetryButton: onClickReload,);
   }
@@ -115,8 +130,8 @@ abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
     dialogsManager(context).showMessageDialog(context, errorModel.message);
   }
 
-  void onClickReload(BuildContext context) {
-    loadInitialData(context);
+  void onClickReload() {
+    loadInitialData(gContext!);
   }
 
   void onRequestSuccess(BuildContext context , successData) {}
@@ -130,8 +145,8 @@ abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
         buildWhen: (state, current) {
           return current is DataStateFBuilder;
         },
-        builder: (context, state) => buildStateWidget(context,state),
-        listener: (context, state) => handleStateChange(context, state));
+        builder: (context, state) => handleUiState(state, context),
+        listener: (context, state) => buildListener(context, state));
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       loadInitialData(context);
     });
@@ -160,39 +175,10 @@ abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
       automaticallyImplyLeading: false,
       leading: hasBack(context)
           ? BackButton(onPressed: () {
-              Navigator.pop(context);
-            })
+        Navigator.pop(context);
+      })
           : null,
       backgroundColor: backgroundColor(),
     );
   }
-
-  /// Method to handle different state changes
-  void handleStateChange(BuildContext context, DataState state){
-    return _buildListener(context, state);
-  }
-
-  /// Method to build the widget based on the current state
-  Widget buildStateWidget(BuildContext context, DataState state){
-    return _handleUiState(state, context);
-  }
-
-  void _buildListener(BuildContext context, dynamic state) {
-    if (state is LoadingStateListener) {
-      showProgress();
-    } else {
-      dismissProgress();
-    }
-
-    if (state is FailureStateListener) {
-      dismissProgress();
-      handleApiErrorDialog(state.error, context);
-    }
-
-    if (state is SuccessStateListener) {
-      dismissProgress();
-      onRequestSuccess(context , state.data);
-    }
-  }
-
 }
