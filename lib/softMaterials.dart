@@ -17,3 +17,4 @@ export 'errorManager.dart';
 export 'package:flutter_localizations/flutter_localizations.dart';
 export 'package:softcore/src/di/softcore_injector.dart';
 export 'package:softcore/src/di/index.dart';
+export 'package:softcore/src/core/components/base/softcore_bloc_statelesswidget.dart';
