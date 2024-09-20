@@ -64,7 +64,7 @@ class OptionsMenuButton extends MaterialStatelessWidget {
 
   Widget menuItemWidget(String name) {
     return Text(name,
-        style: gContext!.textTheme.bodyMedium);
+        style: publicContext!.textTheme.bodyMedium);
   }
 
   @override

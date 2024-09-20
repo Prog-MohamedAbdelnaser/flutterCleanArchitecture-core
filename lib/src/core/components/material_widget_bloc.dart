@@ -2,13 +2,12 @@ import 'package:get/get.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../../main_index.dart';
-import '../dialogs/progress_dialog.dart';
+import '../../../softMaterials.dart';
 
 abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
     extends MaterialStatelessWidget {
    final B  bloc ;
-    CustomProgressDialog get _progress => dialogsManager(gContext!).createProgress(Get.context!);
-
+   late SoftCoreContext softContext ;
 
   MaterialBlocWidget({Key? key})
       :bloc= GetIt.instance.get<B>()
@@ -26,21 +25,21 @@ abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
 
     if (state is FailureStateListener) {
       dismissProgress();
-      handleApiErrorDialog(state.error, gContext!);
+      handleApiErrorDialog(state.error, publicContext!);
     }
 
     if (state is SuccessStateListener) {
       dismissProgress();
-      onRequestSuccess(gContext! , state.data);
+      onRequestSuccess(publicContext! , state.data);
     }
   }
 
   showProgress() {
-    _progress.show();
+    softContext.showProgress();
   }
 
   dismissProgress() {
-    _progress.dismiss();
+    softContext.hideProgress();
   }
 
   @protected
@@ -51,19 +50,20 @@ abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
     return null;
   }
   TextStyle titleStyle(){
-    return  gContext!.textTheme.titleLarge!;
+    return  publicContext!.textTheme.titleLarge!;
   }
-
 
   @override
-  Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      onBuild(context);
-    });
-    return safeArea() ? SafeArea(
-        child: buildScaffold(context)
-    ):buildScaffold(context);
+  void onBuild(SoftCoreContext context) {
+    this.softContext =  context ;
   }
+   @override
+  Widget softBuild(SoftCoreContext context) {
+     return safeArea() ? SafeArea(
+         child: buildScaffold(context.context)
+     ):buildScaffold(context.context);
+  }
+
 
   Widget buildScaffold(BuildContext context){
     return Scaffold(
@@ -122,7 +122,7 @@ abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
 
   ErrorPlaceHolderWidget placeHolderWidget(
       {exception, Function()? onClickReload}){
-    return ErrorPlaceHolderWidget(error: errorManager(gContext!).prepareError(exception),onRetryButton: onClickReload,);
+    return ErrorPlaceHolderWidget(error: errorManager(publicContext!).prepareError(exception),onRetryButton: onClickReload,);
   }
 
   void handleApiErrorDialog(error, BuildContext context) {
@@ -131,7 +131,7 @@ abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
   }
 
   void onClickReload() {
-    loadInitialData(gContext!);
+    loadInitialData(publicContext!);
   }
 
   void onRequestSuccess(BuildContext context , successData) {}
@@ -153,7 +153,6 @@ abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
     return consumer;
   }
 
-  void onBuild(BuildContext context) {}
 
   handleErrorDialogBuilder(dynamic exception) {
     final context = Get.context!;

@@ -61,10 +61,10 @@ class ListPickerWidget extends MaterialStatelessWidget {
         required String hint,
         TextEditingController? controller}) {
     return MaterialTextField(
-      style: gContext?.textTheme.labelMedium,
+      style: publicContext?.textTheme.labelMedium,
       controller: controller,
       onChanged: onChange,
-      inputDecoration: gContext?.inputDecoration().copyWith(
+      inputDecoration: publicContext?.inputDecoration().copyWith(
           prefixIcon: const Padding(
             padding: EdgeInsetsDirectional.only(start: 16, end: 8),
             child: Icon(Icons.search),
@@ -74,7 +74,7 @@ class ListPickerWidget extends MaterialStatelessWidget {
           prefixIconConstraints: const BoxConstraints(
             maxHeight: 15,
           ),
-          hintStyle:gContext?.textTheme.displayMedium),
+          hintStyle:publicContext?.textTheme.displayMedium),
     );
   }
   @override
