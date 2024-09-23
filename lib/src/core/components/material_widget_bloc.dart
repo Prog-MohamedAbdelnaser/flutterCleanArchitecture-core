@@ -53,27 +53,24 @@ abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
     return  publicContext!.textTheme.titleLarge!;
   }
 
-  @override
-  void onBuild(SoftCoreContext context) {
-    this.softContext =  context ;
-  }
+
    @override
   Widget softBuild(SoftCoreContext context) {
      this.softContext =  context ;
      return safeArea() ? SafeArea(
-         child: buildScaffold(context.context)
-     ):buildScaffold(context.context);
+         child: buildScaffold(context)
+     ):buildScaffold(context);
   }
 
 
-  Widget buildScaffold(BuildContext context){
+  Widget buildScaffold(SoftCoreContext context){
     return Scaffold(
       backgroundColor: backgroundColor(),
-      appBar: title(context)==null ?null:  mAppBar(context),
+      appBar: title(context.context)==null ?null:  mAppBar(context.context),
       body: scaffoldBody(context),
     );
   }
-  Widget scaffoldBody(BuildContext context){
+  Widget scaffoldBody(SoftCoreContext context){
     return buildConsumer(context);
   }
   bool safeArea(){
@@ -137,7 +134,8 @@ abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
 
   void onRequestSuccess(BuildContext context , successData) {}
 
-  BlocConsumer buildConsumer(BuildContext context) {
+  BlocConsumer buildConsumer(SoftCoreContext context) {
+    this.softContext = context;
     final consumer = BlocConsumer<B, DataState>(
         bloc: bloc,
         listenWhen: (state, current) {
@@ -149,7 +147,7 @@ abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
         builder: (context, state) => handleUiState(state, context),
         listener: (context, state) => buildListener(context, state));
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      loadInitialData(context);
+      loadInitialData(context.context);
     });
     return consumer;
   }
