@@ -59,6 +59,7 @@ abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
   }
    @override
   Widget softBuild(SoftCoreContext context) {
+     this.softContext =  context ;
      return safeArea() ? SafeArea(
          child: buildScaffold(context.context)
      ):buildScaffold(context.context);
