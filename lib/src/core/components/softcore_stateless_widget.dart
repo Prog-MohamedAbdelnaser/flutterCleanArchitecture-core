@@ -4,8 +4,9 @@ import 'package:get/get.dart';
 import '../../di/dependency_injector.dart';
 import '../../di/dialog_manager_factory.dart';
 import '../../di/error_handler_factory.dart';
-import '../../di/error_widget_factory.dart';
-import '../../di/error_widget_factory_registry.dart';
+import '../../di/states_widgets_factory.dart';
+import '../../di/states_widget_factory_registry.dart';
+import '../../di/soft_core_dependencies_factories.dart';
 import '../../di/softcore_injector.dart';
 import '../dialogs/dialogs_manager.dart';
 import '../managers/error_handler.dart';
@@ -14,18 +15,20 @@ import '/src/core/dialogs/progress_dialog.dart';
 import '../../../main_index.dart';
 import 'base/softcore_context/softcore_base_context.dart';
 import 'base/softcore_context/softcore_context.dart';
-abstract class MaterialStatelessWidget extends StatelessWidget {
+abstract class SoftCoreStatelessWidget extends StatelessWidget {
 
   BuildContext? get  publicContext => Get.context;
   String get  local => Get.locale?.languageCode ?? 'en';
   TextTheme get textTheme => Get.context!.textTheme;
   bool isRtl() => local == 'ar';
-  ErrorHandler get errorManager => ErrorHandlerFactory.getErrorHandler();
-  ErrorWidgetFactory get errorWidgetFactory => ErrorWidgetFactoryRegistry.getErrorWidgetFactory();
-  DialogsManager get dialogsManager => DialogsManagerFactory.getDialogsManager();
+
+  SoftCoreDependenciesFactories get softCoreDependenciesFactories => SoftCoreDependenciesFactories();
+  ErrorHandler get errorManager => softCoreDependenciesFactories.errorManager;
+  StatesWidgetFactory get statesWidgetsFactory => softCoreDependenciesFactories.statesWidgetsFactory;
+  DialogsManager get dialogsManager => softCoreDependenciesFactories.dialogsManager;
   DependencyInjector injector () => SoftCoreInjector.injector();
 
-  const MaterialStatelessWidget({Key? key}):   super(key: key);
+  const  SoftCoreStatelessWidget({Key? key}):   super(key: key);
 
 
   T? getArguments<T>(BuildContext context ){
@@ -37,7 +40,7 @@ abstract class MaterialStatelessWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SoftCoreContext softContext =  BaseCoreContext(context, dialogsManager: DialogsManager(), progress: DialogsManager().createProgress(context));
+    SoftCoreContext softContext =  BaseCoreContext(context, dialogsManager: dialogsManager, progress: dialogsManager.createProgress(context));
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       onBuild(softContext);
     });

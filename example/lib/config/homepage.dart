@@ -13,6 +13,7 @@ class HomePage extends MaterialBlocWidget<DataSuccess,HomeCubit>{
   void loadInitialData(BuildContext context) {
     bloc.fetch();
   }
+
   @override
   HomeCubit get bloc => HomeCubit();
 }

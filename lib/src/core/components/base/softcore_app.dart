@@ -2,13 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:softcore/main_index.dart';
-import 'package:softcore/src/core/components/placeholder/soft_error_widget.dart';
-
 import '../../../../errorManager.dart';
 import '../../../../softMaterials.dart';
 import '../../../di/error_handler_factory.dart';
-import '../../../di/error_widget_factory.dart';
-import '../../../di/error_widget_factory_registry.dart';
+import '../../../di/states_widgets_factory.dart';
+import '../../../di/states_widget_factory_registry.dart';
 import '../../dialogs/dialogs_manager.dart';
 import '../../managers/error_handler.dart';
 
@@ -21,7 +19,7 @@ class SoftCoreApp extends StatelessWidget {
   final Iterable<Locale>? supportedLocales;
   final ErrorHandler? errorHandler;
   final DialogsManager? dialogsManager;
-  final ErrorWidgetFactory? errorWidgetFactory;
+  final StatesWidgetFactory? errorWidgetFactory;
   final DependencyInjector dependencyInjector ;
   final void Function()? onInit;
 
@@ -64,7 +62,7 @@ class SoftCoreApp extends StatelessWidget {
     );
 
     if (errorWidgetFactory != null) {
-      ErrorWidgetFactoryRegistry.setCustomErrorWidgetFactory(
+      StatesWidgetsFactoryRegistry.setCustomErrorWidgetFactory(
           errorWidgetFactory!);
     }
   }

@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 
 import '../../../softMaterials.dart';
+import '../../di/soft_core_dependencies_factories.dart';
 import 'base/softcore_context/softcore_base_context.dart';
 
 @immutable
-abstract class SoftMaterialWidget extends StatefulWidget {
-   SoftMaterialWidget({Key? key}) : super(key: key);
+abstract class SoftLifeCycleWidget extends StatefulWidget {
+  SoftLifeCycleWidget({Key? key}) : super(key: key);
   late SoftCoreContext softContext;
 
 
@@ -26,8 +27,9 @@ abstract class SoftMaterialWidget extends StatefulWidget {
 
 }
 
-class _MaterialStatefulWidgetState extends State<SoftMaterialWidget>
+class _MaterialStatefulWidgetState extends State<SoftLifeCycleWidget>
     with WidgetsBindingObserver {
+  final SoftCoreDependenciesFactories softCoreDependenciesFactories = SoftCoreDependenciesFactories();
   late SoftCoreContext _softContext;
 
   @override
@@ -67,8 +69,8 @@ class _MaterialStatefulWidgetState extends State<SoftMaterialWidget>
   SoftCoreContext _createCoreContext(BuildContext context) {
     return BaseCoreContext(
       context,
-      dialogsManager: DialogsManager(),
-      progress: DialogsManager().createProgress(context),
+      dialogsManager: softCoreDependenciesFactories.dialogsManager,
+      progress: softCoreDependenciesFactories.dialogsManager.createProgress(context),
     );
   }
 }

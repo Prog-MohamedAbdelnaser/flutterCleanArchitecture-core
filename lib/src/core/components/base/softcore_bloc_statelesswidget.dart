@@ -4,7 +4,7 @@ import 'package:softcore/src/di/softcore_injector.dart';
 
 import '../../../di/error_handler_factory.dart';
 import '../../managers/error_handler.dart';
-import '../material_stateless_widget.dart';
+import '../softcore_stateless_widget.dart';
 
 /// Base stateless widget for handling Bloc states and side effects.
 ///
@@ -12,7 +12,7 @@ import '../material_stateless_widget.dart';
 /// UI and handle side effects for specific state changes.
 ///
 /// [B] is the BlocBase, [S] is the state.
-abstract class SoftCoreBlocStateless<T, B extends BlocBase<S>, S> extends MaterialStatelessWidget {
+abstract class SoftCoreBlocStateless<T, B extends BlocBase<S>, S> extends SoftCoreStatelessWidget {
   final B? blocInstance;
 
   const SoftCoreBlocStateless({super.key, this.blocInstance});

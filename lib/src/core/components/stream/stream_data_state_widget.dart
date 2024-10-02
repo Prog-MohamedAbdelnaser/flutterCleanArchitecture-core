@@ -3,7 +3,7 @@ import '../../../../softMaterials.dart';
 import '../../bloc/data_state.dart';
 
 
-class StreamDataStateWidget<T> extends MaterialStatelessWidget {
+class StreamDataStateWidget<T> extends SoftCoreStatelessWidget {
   final Widget Function(BuildContext context, T data) ?builder;
   final Widget Function(BuildContext context, DataState<T> state) ? stateBuilder;
   final Widget Function(BuildContext context, Widget child)? frameBuilder;
@@ -39,7 +39,7 @@ class StreamDataStateWidget<T> extends MaterialStatelessWidget {
       return builder!=null ?builder!(context, state.data):const SizedBox.shrink();
     }
     if (state is DataLoading) {
-      return  LoadingView(height: placeHolderHeight,);
+      return  statesWidgetsFactory.createLoadingViewWidget(height: placeHolderHeight,);
     }
 
     if (state is DataFailed) {
@@ -52,7 +52,7 @@ class StreamDataStateWidget<T> extends MaterialStatelessWidget {
   Widget handleApiErrorPlaceHolder(BuildContext context, error,
       {Function()? onClickReload}) {
     final errorModel = errorManager.prepareError(error);
-    return errorWidgetFactory.createErrorWidget(
+    return statesWidgetsFactory.createErrorWidget(
       errorModel,
       onRetry: onReload,
       height: placeHolderHeight??250,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../../softMaterials.dart';
 import '../../bloc/data_state.dart';
 
-class StreamStateWidget<T> extends MaterialStatelessWidget {
+class StreamStateWidget<T> extends SoftCoreStatelessWidget {
   final Widget Function(BuildContext context, T data) builder;
   final Widget Function(BuildContext context)? preLoadingBuilder;
   final Widget Function(BuildContext context, dynamic error)? errorBuilder;
@@ -31,7 +31,7 @@ class StreamStateWidget<T> extends MaterialStatelessWidget {
           } else if (snapshot.error != null) {
             return errorBuilder!=null ? errorBuilder!(context,snapshot.error):  handleApiErrorPlaceHolder(context, snapshot.error, onClickReload: onReload);
           }
-          return preLoadingBuilder !=null ? preLoadingBuilder!(context): const  LoadingView(height: 150,);
+          return preLoadingBuilder !=null ? preLoadingBuilder!(context):   statesWidgetsFactory.createLoadingViewWidget(height: 150,);
         });
   }
 
@@ -39,7 +39,7 @@ class StreamStateWidget<T> extends MaterialStatelessWidget {
   Widget handleApiErrorPlaceHolder(BuildContext context, error,
       {Function()? onClickReload}) {
     final errorModel = errorManager.prepareError(error);
-    return errorWidgetFactory.createErrorWidget(
+    return statesWidgetsFactory.createErrorWidget(
       errorModel,
       onRetry: onReload,
       height: 250,

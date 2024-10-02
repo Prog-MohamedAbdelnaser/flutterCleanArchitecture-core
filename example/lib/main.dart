@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
       onInit: (){
 
       },
-      errorWidgetFactory: DefaultErrorWidgetFactory(),
+      errorWidgetFactory: DefaultStatesWidgetFactory(),
       errorHandler: DefaultErrorHandler.instance,
       dialogsManager: DefaultDialogsManager(),
       home: Padding(

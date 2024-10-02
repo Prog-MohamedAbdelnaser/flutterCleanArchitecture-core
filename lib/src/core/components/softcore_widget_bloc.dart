@@ -1,8 +1,7 @@
 import 'package:get/get.dart';
-import 'package:softcore/src/core/components/placeholder/soft_error_widget.dart';
-
 import '../../../main_index.dart';
-import '../../di/error_widget_factory_registry.dart';
+import '../../../softMaterials.dart';
+import '../../di/states_widget_factory_registry.dart';
 import '../dialogs/dialogs_manager.dart';
 import '../dialogs/progress_dialog.dart';
 import 'package:get_it/get_it.dart';
@@ -17,7 +16,7 @@ abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
   B get bloc => GetIt.instance.get<B>();
 
 
-  const MaterialBlocWidget({Key? key}) : super(key: key);
+   MaterialBlocWidget({Key? key}) : super(key: key);
 
   @protected
   Widget buildWidget(BuildContext context, T state);
@@ -60,7 +59,7 @@ abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
     );
   }
   Widget scaffoldBody(SoftCoreContext context){
-    return buildConsumer(context);
+    return super.build(context.context);
   }
   bool safeArea(){
     return true ;
@@ -84,7 +83,7 @@ abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
   Widget handleUiState(DataState state, BuildContext context) {
     print('handleUiState $state => ${state is T}');
     if (state is DataLoading) {
-      return LoadingView();
+      return statesWidgetsFactory.createLoadingViewWidget();
     }
     if (state is T) {
       return buildWidget(context, state as T);
@@ -111,7 +110,7 @@ abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
 
   Widget errorWidget(
       {exception, Function()? onClickReload}){
-    return errorWidgetFactory.createErrorWidget(errorManager.prepareError(exception),onRetry: onClickReload,);
+    return statesWidgetsFactory.createErrorWidget(errorManager.prepareError(exception),onRetry: onClickReload,);
   }
 
   void handleApiErrorDialog(error, BuildContext context) {
@@ -133,8 +132,6 @@ abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
   bool buildWhen(DataState previous, DataState current) {
     return current is DataStateFBuilder;
   }
-  void onBuild(BuildContext context) {}
-
   handleErrorDialogBuilder(dynamic exception) {
     final context = Get.context!;
     dialogsManager.showMessageDialog(context, exception);
@@ -165,7 +162,7 @@ abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
   }
   @override
   Widget buildStateWidget(BuildContext context, DataState state) {
-    return _handleUiState(state, context);
+    return handleUiState(state, context);
   }
 
   void _buildListener(BuildContext context, dynamic state) {

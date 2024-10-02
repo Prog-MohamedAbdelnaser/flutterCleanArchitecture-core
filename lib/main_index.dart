@@ -1,9 +1,9 @@
 export 'src/core/extensions/extensions.dart';
-export 'src/core/components/material_stateless_widget.dart';
+export 'src/core/components/softcore_stateless_widget.dart';
 export 'src/core/bloc/data_state.dart';
 export 'src/core/managers/default_dialogs_manager.dart';
-export 'src/core/components/placeholder/default_error_widget.dart';
-export 'src/core/components/loading_widget.dart';
+export 'src/core/components/stateswidgets/default_error_widget.dart';
+export 'src/core/components/stateswidgets/softcore_default_loading_widget.dart';
 export 'package:flutter_bloc/flutter_bloc.dart';
 export 'package:flutter/material.dart';
 export 'src/core/bloc/base_cubit.dart';

@@ -1,15 +1,12 @@
 import 'package:softcore/errorManager.dart';
 import 'package:softcore/main_index.dart';
 
-abstract class SoftErrorWidget extends MaterialStatelessWidget {
-  final AppError error;
-  final Function()? onRetry;
+abstract class SoftLoadingWidget extends SoftCoreStatelessWidget {
   final double? height;
 
-  const SoftErrorWidget({
+  const SoftLoadingWidget({
     Key? key,
-    required this.error,this.height,
-    this.onRetry,
+    this.height,
   }) : super(key: key);
 
   @override

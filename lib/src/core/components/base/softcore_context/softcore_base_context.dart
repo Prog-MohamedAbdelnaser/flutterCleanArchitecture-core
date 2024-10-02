@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import '../../../../../softMaterials.dart';
+import '../../../dialogs/dialogs_manager.dart';
 import '../../../dialogs/progress_dialog.dart';
 
 class  BaseCoreContext extends SoftCoreContext {
   // Managers for dialogs and progress
    final DialogsManager dialogsManager;
-   final CustomProgressDialog progress;
+   final SoftcoreProgressDialog progress;
 
   // Initialize context, dialog manager, and progress dialog
   const BaseCoreContext(BuildContext context ,
