@@ -11,6 +11,11 @@ import 'base/softcore_bloc_statelesswidget.dart';
 
 abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
     extends SoftCoreBlocStateless<T,B,DataState> {
+  late SoftCoreContext softContext ;
+
+
+  B get bloc => GetIt.instance.get<B>();
+
 
   const MaterialBlocWidget({Key? key}) : super(key: key);
 
@@ -19,14 +24,12 @@ abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
 
 
   showProgress() {
-    progress.show();
+    softContext.showProgress();
   }
 
   dismissProgress() {
-    progress.dismiss();
+    softContext.hideProgress();
   }
-
-  SoftcoreProgressDialog get progress => dialogsManager.createProgress(gContext!);
 
   @protected
   void loadInitialData(BuildContext context) {}
@@ -36,37 +39,33 @@ abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
     return null;
   }
   TextStyle titleStyle(){
-    return  textTheme.titleLarge!;
+    return  publicContext!.textTheme.titleLarge!;
   }
 
 
-  @override
-  Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      onBuild(context);
-    });
-    return safeArea() ? SafeArea(
-      child: buildScaffold(context)
-    ):buildScaffold(context);
+   @override
+  Widget softBuild(SoftCoreContext context) {
+     this.softContext =  context ;
+     return safeArea() ? SafeArea(
+         child: buildScaffold(context)
+     ):buildScaffold(context);
   }
 
-  Widget buildScaffold(BuildContext context){
+
+  Widget buildScaffold(SoftCoreContext context){
     return Scaffold(
       backgroundColor: backgroundColor(),
-      appBar: title(context)==null ?null:  mAppBar(context),
+      appBar: title(context.context)==null ?null:  mAppBar(context.context),
       body: scaffoldBody(context),
     );
   }
-  Widget scaffoldBody(BuildContext context){
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      loadInitialData(context);
-    });
-    return super.build(context);
+  Widget scaffoldBody(SoftCoreContext context){
+    return buildConsumer(context);
   }
   bool safeArea(){
     return true ;
   }
-  
+
   @protected
   Color backgroundColor() {
     return Colors.transparent;
@@ -82,9 +81,10 @@ abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
     return Navigator.canPop(context);
   }
 
-  Widget _handleUiState(DataState state, BuildContext context) {
+  Widget handleUiState(DataState state, BuildContext context) {
+    print('handleUiState $state => ${state is T}');
     if (state is DataLoading) {
-      return const LoadingView();
+      return LoadingView();
     }
     if (state is T) {
       return buildWidget(context, state as T);
