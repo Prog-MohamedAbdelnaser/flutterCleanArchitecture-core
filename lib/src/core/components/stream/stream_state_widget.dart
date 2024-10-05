@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../../softMaterials.dart';
 import '../../bloc/data_state.dart';
 
-class StreamStateWidget<T> extends SoftCoreStatelessWidget {
+class StreamStateWidget<T> extends SoftStatelessWidget {
   final Widget Function(BuildContext context, T data) builder;
   final Widget Function(BuildContext context)? preLoadingBuilder;
   final Widget Function(BuildContext context, dynamic error)? errorBuilder;

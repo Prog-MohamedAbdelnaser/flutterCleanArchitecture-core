@@ -1,7 +1,7 @@
 import 'package:softcore/errorManager.dart';
 import 'package:softcore/main_index.dart';
 
-abstract class SoftLoadingWidget extends SoftCoreStatelessWidget {
+abstract class SoftLoadingWidget extends SoftStatelessWidget {
   final double? height;
 
   const SoftLoadingWidget({

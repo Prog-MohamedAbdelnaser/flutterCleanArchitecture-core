@@ -1,8 +1,8 @@
 library softMaterials;
 
 export 'src/core/extensions/extensions.dart';
-export 'src/core/components/softcore_stateless_widget.dart';
-export 'src/core/components/softcore_widget_bloc.dart';
+export 'src/core/components/soft_stateless_widget.dart';
+export 'src/core/components/soft_widget_bloc.dart';
 export 'src/core/managers/default_dialogs_manager.dart';
 export 'src/core/components/stateswidgets/default_error_widget.dart';
 export 'src/core/components/stateswidgets/softcore_default_loading_widget.dart';

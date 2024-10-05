@@ -8,7 +8,7 @@ import 'package:get_it/get_it.dart';
 
 import 'base/softcore_bloc_statelesswidget.dart';
 
-abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
+abstract class SoftBlocWidget<T, B extends BlocBase<DataState>>
     extends SoftCoreBlocStateless<T,B,DataState> {
   late SoftCoreContext softContext ;
 
@@ -16,10 +16,10 @@ abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
   B get bloc => GetIt.instance.get<B>();
 
 
-   MaterialBlocWidget({Key? key}) : super(key: key);
+   SoftBlocWidget({Key? key}) : super(key: key);
 
   @protected
-  Widget buildWidget(BuildContext context, T state);
+  Widget buildWidget(SoftCoreContext context, T state);
 
 
   showProgress() {
@@ -31,7 +31,7 @@ abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
   }
 
   @protected
-  void loadInitialData(BuildContext context) {}
+  void loadInitialData(SoftCoreContext context) {}
 
   @protected
   String? title(BuildContext context) {
@@ -80,7 +80,7 @@ abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
     return Navigator.canPop(context);
   }
 
-  Widget handleUiState(DataState state, BuildContext context) {
+  Widget handleUiState(DataState state, SoftCoreContext context) {
     print('handleUiState $state => ${state is T}');
     if (state is DataLoading) {
       return statesWidgetsFactory.createLoadingViewWidget();
@@ -97,7 +97,7 @@ abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
     return onBuildUnInitWidget(context);
   }
 
-  Widget onBuildUnInitWidget(BuildContext context) {
+  Widget onBuildUnInitWidget(SoftCoreContext context) {
     return const Center();
   }
 
@@ -113,16 +113,16 @@ abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
     return statesWidgetsFactory.createErrorWidget(errorManager.prepareError(exception),onRetry: onClickReload,);
   }
 
-  void handleApiErrorDialog(error, BuildContext context) {
+  void handleApiErrorDialog(error, SoftCoreContext context) {
     final errorModel = errorManager.prepareError(error);
-    dialogsManager.showMessageDialog(context, errorModel.message);
+    dialogsManager.showMessageDialog(context.context, errorModel.message);
   }
 
-  void onClickReload(BuildContext context) {
+  void onClickReload(SoftCoreContext context) {
     loadInitialData(context);
   }
 
-  void onRequestSuccess(BuildContext context , successData) {}
+  void onRequestSuccess(SoftCoreContext context , successData) {}
 
   @override
   bool listenWhen(DataState previous, DataState current) {
@@ -157,15 +157,15 @@ abstract class MaterialBlocWidget<T, B extends BlocBase<DataState>>
   }
 
 @override
-  void handleStateChange(BuildContext context, DataState state) {
+  void handleStateChange(SoftCoreContext context, DataState state) {
     _buildListener(context, state);
   }
   @override
-  Widget buildStateWidget(BuildContext context, DataState state) {
+  Widget buildStateWidget(SoftCoreContext context, DataState state) {
     return handleUiState(state, context);
   }
 
-  void _buildListener(BuildContext context, dynamic state) {
+  void _buildListener(SoftCoreContext context, dynamic state) {
     if (state is LoadingStateListener) {
       showProgress();
     } else {

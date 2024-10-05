@@ -15,7 +15,7 @@ import '/src/core/dialogs/progress_dialog.dart';
 import '../../../main_index.dart';
 import 'base/softcore_context/softcore_base_context.dart';
 import 'base/softcore_context/softcore_context.dart';
-abstract class SoftCoreStatelessWidget extends StatelessWidget {
+abstract class SoftStatelessWidget extends StatelessWidget {
 
   BuildContext? get  publicContext => Get.context;
   String get  local => Get.locale?.languageCode ?? 'en';
@@ -28,7 +28,7 @@ abstract class SoftCoreStatelessWidget extends StatelessWidget {
   DialogsManager get dialogsManager => softCoreDependenciesFactories.dialogsManager;
   DependencyInjector injector () => SoftCoreInjector.injector();
 
-  const  SoftCoreStatelessWidget({Key? key}):   super(key: key);
+  const  SoftStatelessWidget({Key? key}):   super(key: key);
 
 
   T? getArguments<T>(BuildContext context ){

@@ -3,7 +3,7 @@ import '../../../../softMaterials.dart';
 import '../../bloc/data_state.dart';
 
 
-class StreamDataStateWidget<T> extends SoftCoreStatelessWidget {
+class StreamDataStateWidget<T> extends SoftStatelessWidget {
   final Widget Function(BuildContext context, T data) ?builder;
   final Widget Function(BuildContext context, DataState<T> state) ? stateBuilder;
   final Widget Function(BuildContext context, Widget child)? frameBuilder;

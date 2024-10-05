@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:softcore/softMaterials.dart';
 import 'package:softcore/src/di/softcore_injector.dart';
 
 import '../../../di/error_handler_factory.dart';
 import '../../managers/error_handler.dart';
-import '../softcore_stateless_widget.dart';
+import '../soft_stateless_widget.dart';
 
 /// Base stateless widget for handling Bloc states and side effects.
 ///
@@ -12,7 +13,7 @@ import '../softcore_stateless_widget.dart';
 /// UI and handle side effects for specific state changes.
 ///
 /// [B] is the BlocBase, [S] is the state.
-abstract class SoftCoreBlocStateless<T, B extends BlocBase<S>, S> extends SoftCoreStatelessWidget {
+abstract class SoftCoreBlocStateless<T, B extends BlocBase<S>, S> extends SoftStatelessWidget {
   final B? blocInstance;
 
   const SoftCoreBlocStateless({super.key, this.blocInstance});
@@ -20,11 +21,11 @@ abstract class SoftCoreBlocStateless<T, B extends BlocBase<S>, S> extends SoftCo
   B get bloc => blocInstance ?? SoftCoreInjector.get<B>();
 
   @override
-  Widget build(BuildContext context) {
+  Widget softBuild(SoftCoreContext context) {
     return BlocConsumer<B, S>(
       bloc: bloc,
-      listener: (context, state) => handleStateChange(context, state),
-      builder: (context, state) => buildStateWidget(context, state),
+      listener: (_, state) => handleStateChange(context, state),
+      builder: (_, state) => buildStateWidget(context, state),
       buildWhen: buildWhen,
       listenWhen: listenWhen,
     );
@@ -37,13 +38,13 @@ abstract class SoftCoreBlocStateless<T, B extends BlocBase<S>, S> extends SoftCo
   /// snack bars, performing navigation, or logging.
   ///
   /// Use [listenWhen] to control which states should trigger this method.
-  void handleStateChange(BuildContext context, S state) {}
+  void handleStateChange(SoftCoreContext context, S state) {}
 
   /// Build the UI based on the current state of the Bloc.
   ///
   /// Developers must override this method to define how the UI
   /// responds to different states.
-  Widget buildStateWidget(BuildContext context, S state);
+  Widget buildStateWidget(SoftCoreContext context, S state);
 
   /// A function to determine which states should trigger the listener
   bool listenWhen(S previous, S current) {
