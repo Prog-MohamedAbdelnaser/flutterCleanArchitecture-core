@@ -55,7 +55,7 @@ class SoftCoreApp extends StatelessWidget {
   }
 
   void _initializeHandler() {
-    SoftCoreInjector.initialize(dependencyInjector!);
+    SoftCoreInjector.initialize(dependencyInjector);
       // Register a default error handler if none provided
     ErrorHandlerFactory.setCustomErrorHandler(
       errorHandler ?? DefaultErrorHandler.instance,

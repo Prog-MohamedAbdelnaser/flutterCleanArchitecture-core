@@ -5,8 +5,8 @@ import '../../di/soft_core_dependencies_factories.dart';
 import 'base/softcore_context/softcore_base_context.dart';
 
 @immutable
-abstract class SoftLifeCycleWidget extends StatefulWidget {
-  SoftLifeCycleWidget({Key? key}) : super(key: key);
+abstract class SoftLifecycleWidget extends StatefulWidget {
+  SoftLifecycleWidget({Key? key}) : super(key: key);
   late SoftCoreContext softContext;
 
 
@@ -27,7 +27,7 @@ abstract class SoftLifeCycleWidget extends StatefulWidget {
 
 }
 
-class _MaterialStatefulWidgetState extends State<SoftLifeCycleWidget>
+class _MaterialStatefulWidgetState extends State<SoftLifecycleWidget>
     with WidgetsBindingObserver {
   final SoftCoreDependenciesFactories softCoreDependenciesFactories = SoftCoreDependenciesFactories();
   late SoftCoreContext _softContext;
