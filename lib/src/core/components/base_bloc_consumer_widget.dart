@@ -4,14 +4,14 @@ import 'package:softcore/basebloc.dart';
 
 import '../../../softMaterials.dart';
 
-class BaseBlocConsumerBuilder<B extends BlocBase<S>, S> extends MaterialStatelessWidget {
+class SoftBlocConsumer<B extends BlocBase<S>, S> extends MaterialStatelessWidget {
   final B bloc;
   final Widget Function(BuildContext context, S state) builder;
   final void Function(BuildContext context, S state)? listener;
   final Widget Function(BuildContext context)? loadingBuilder;
   final Widget Function(BuildContext context, String message)? errorBuilder;
   final Function()? onClickReload ;
-  const BaseBlocConsumerBuilder({
+  const SoftBlocConsumer({
     Key? key,
     required this.bloc,
     required this.builder,
