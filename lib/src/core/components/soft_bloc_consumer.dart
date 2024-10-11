@@ -4,13 +4,14 @@ import 'package:softcore/basebloc.dart';
 
 import '../../../softMaterials.dart';
 
-class SoftBlocConsumer<B extends BlocBase<S>, S> extends MaterialStatelessWidget {
+class SoftBlocConsumer<S> extends MaterialStatelessWidget {
   final B bloc;
   final Widget Function(BuildContext context, S state) builder;
   final void Function(BuildContext context, S state)? listener;
   final Widget Function(BuildContext context)? loadingBuilder;
   final Widget Function(BuildContext context, String message)? errorBuilder;
   final Function()? onClickReload ;
+  final Function(dynamic data)? onRequestSuccess ;
   const SoftBlocConsumer({
     Key? key,
     required this.bloc,
@@ -18,7 +19,7 @@ class SoftBlocConsumer<B extends BlocBase<S>, S> extends MaterialStatelessWidget
     this.listener,
     this.loadingBuilder,
     this.errorBuilder,
-    this.onClickReload
+    this.onClickReload,this.onRequestSuccess
   }) : super(key: key);
 
   @override
@@ -31,7 +32,7 @@ class SoftBlocConsumer<B extends BlocBase<S>, S> extends MaterialStatelessWidget
       buildWhen: (previous, current) {
         return current is DataStateFBuilder;
       },
-      listener: listener ?? (context, state) {},
+      listener: listener ?? buildListener(context, state),
       builder: (context, state) {
         if (state is DataLoading ) {
           return loadingBuilder != null ?loadingBuilder!(context) :const LoadingView(height: 150,);
@@ -43,6 +44,23 @@ class SoftBlocConsumer<B extends BlocBase<S>, S> extends MaterialStatelessWidget
         }
       },
     );
+  }
+
+
+  void buildListener(BuildContext context, dynamic state) {
+    if (state is LoadingStateListener) {
+      showProgress();
+    } else {
+      dismissProgress();
+    }
+
+    if (state is FailureStateListener) {
+      handleApiErrorDialog(state.error, context);
+    }
+
+    if (state is SuccessStateListener) {
+      onRequestSuccess(context , state.data);
+    }
   }
 
   ErrorPlaceHolderWidget placeHolderWidget(
