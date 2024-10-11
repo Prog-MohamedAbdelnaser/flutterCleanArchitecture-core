@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:softcore/basebloc.dart';
 
-class BaseBlocConsumerBuilder<B extends BlocBase<S>, S> extends StatelessWidget {
+import '../../../softMaterials.dart';
+
+class BaseBlocConsumerBuilder<B extends BlocBase<S>, S> extends MaterialStatelessWidget {
   final B bloc;
   final Widget Function(BuildContext context, S state) builder;
   final void Function(BuildContext context, S state)? listener;
   final Widget Function(BuildContext context)? loadingBuilder;
   final Widget Function(BuildContext context, String message)? errorBuilder;
-
+  final Function()? onClickReload ;
   const BaseBlocConsumerBuilder({
     Key? key,
     required this.bloc,
@@ -16,6 +18,7 @@ class BaseBlocConsumerBuilder<B extends BlocBase<S>, S> extends StatelessWidget 
     this.listener,
     this.loadingBuilder,
     this.errorBuilder,
+    this.onClickReload
   }) : super(key: key);
 
   @override
@@ -30,14 +33,20 @@ class BaseBlocConsumerBuilder<B extends BlocBase<S>, S> extends StatelessWidget 
       },
       listener: listener ?? (context, state) {},
       builder: (context, state) {
-        if (state is DataLoading && loadingBuilder != null) {
-          return loadingBuilder!(context);
-        } else if (state is DataFailed && errorBuilder != null) {
-          return errorBuilder!(context, (state).error);
+        if (state is DataLoading ) {
+          return loadingBuilder != null ?loadingBuilder!(context) :const LoadingView(height: 150,);
+        } else if (state is DataFailed ) {
+          return errorBuilder != null ?errorBuilder!(context, (state).error):
+          placeHolderWidget(exception: state.error,onClickReload: onClickReload);
         } else {
           return builder(context, state);
         }
       },
     );
+  }
+
+  ErrorPlaceHolderWidget placeHolderWidget(
+      {exception, Function()? onClickReload}){
+    return ErrorPlaceHolderWidget(error: errorManager(publicContext!).prepareError(exception),onRetryButton: onClickReload,height: 150,);
   }
 }
