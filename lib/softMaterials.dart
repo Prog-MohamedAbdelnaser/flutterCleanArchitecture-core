@@ -29,3 +29,4 @@ export 'errorManager.dart';
 export 'package:flutter_localizations/flutter_localizations.dart';
 export 'package:softcore/src/core/resources/validation.dart';
 export 'package:softcore/src/core/components/base/softcore_context/softcore_context.dart';
+export 'package:softcore/src/core/components/soft_bloc_consumer.dart';
