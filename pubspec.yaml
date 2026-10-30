@@ -1,0 +1,30 @@
+name: softcore
+description: >-
+  A thin, predictable state layer on top of flutter_bloc: typed DataState,
+  a BaseCubit for requests and one-shot actions, caching, observers, and
+  widgets that render loading, error and data with overridable defaults.
+version: 1.0.0
+homepage: https://github.com/Prog-MohamedAbdelnaser/flutterCleanArchitecture-core
+repository: https://github.com/Prog-MohamedAbdelnaser/flutterCleanArchitecture-core
+issue_tracker: https://github.com/Prog-MohamedAbdelnaser/flutterCleanArchitecture-core/issues
+topics:
+  - state-management
+  - bloc
+  - cubit
+  - clean-architecture
+
+environment:
+  sdk: ^3.5.0
+  flutter: ">=3.24.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_bloc: ">=8.1.0 <10.0.0"
+  meta: ^1.11.0
+
+dev_dependencies:
+  bloc_test: ">=9.1.0 <11.0.0"
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
