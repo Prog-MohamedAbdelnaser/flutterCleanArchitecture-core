@@ -1,3 +1,8 @@
+## 1.0.1
+
+- Shorter package description, so search results show it in full.
+- Documented the `SoftCache` constructor.
+
 ## 1.0.0
 
 A rewrite focused on reliability and a small, predictable API. It now depends

@@ -3,6 +3,9 @@
 /// Keys are always explicit strings: type names are not stable keys (they
 /// collide across generics and are minified on web release builds).
 class SoftCache {
+  /// Creates an empty cache.
+  SoftCache();
+
   final Map<String, _Entry> _entries = {};
 
   /// Returns the cached value for [key] if present, of type [R], and not
